@@ -13,7 +13,6 @@ const MapBox = () => {
   const map = useRef(null);
   const [lng, setLng] = useState(-2.2426);
   const [lat, setLat] = useState(53.4808);
-  const [zoom, setZoom] = useState(12);
   const [search, setSearch] = useState("");
   const [markers, setMarkers] = useState([]);
   const [filteredLocations, setFilteredLocations] = useState([]);
@@ -36,7 +35,7 @@ const MapBox = () => {
       container: mapContainer.current,
       style: "mapbox://styles/mapbox/streets-v12",
       center: [lng, lat],
-      zoom: zoom,
+      zoom: 12,
     });
   }, [lng, lat]);
 
