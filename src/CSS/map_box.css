@@ -7,26 +7,29 @@
   height: 100%;
 }
 .popup-container {
-	padding: 10px;
+  padding: 10px;
 }
 
 .popup-title {
-	font-size: 16px;
-	font-weight: bold;
-	margin-bottom: 5px;
+  font-size: 16px;
+  font-weight: bold;
+  margin-bottom: 5px;
 }
 
 .popup-rating {
-	margin-bottom: 10px;
-	color: #555;
+  margin-bottom: 10px;
+  color: #555;
 }
 
 .popup-button {
-	background-color: #007bff;
-	color: white;
-	border: none;
-	padding: 5px 10px;
-	cursor: pointer;
-	border-radius: 3px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  cursor: pointer;
+  border-radius: 3px;
 }
 
+.mapboxgl-small-popup-content {
+  max-height: 30px;
+}
