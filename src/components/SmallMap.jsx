@@ -6,21 +6,21 @@ import "../CSS/map_box.css";
 mapboxgl.accessToken = mapBoxAccessCode;
 
 const SmallMap = ({ location }) => {
+  console.log(location);
   const mapContainer = useRef(null);
   const map = useRef(null);
-  console.log(location.lng);
   useEffect(() => {
     console.log(mapContainer);
     if (map.current) return;
     map.current = new mapboxgl.Map({
       container: mapContainer.current,
       style: "mapbox://styles/mapbox/streets-v12",
-      center: [location.lng, location.lat],
+      center: [location["co-ords"].lng, location["co-ords"].lat],
       zoom: 14,
     });
 
     new mapboxgl.Marker()
-      .setLngLat([location.lng, location.lat])
+      .setLngLat([location["co-ords"].lng, location["co-ords"].lat])
       .setPopup(new mapboxgl.Popup().setHTML(`<h6 >${location.name}</h6>`))
       .addTo(map.current);
   }, [location]);
