@@ -5,6 +5,7 @@ import "../CSS/map_box.css";
 import { dataMockTwo } from "../utils/mockData";
 import { useNavigate } from "react-router-dom";
 import SearchBar from "./SearchBar";
+import { getCoordinates, getNearbyLocations } from "../utils/axios";
 
 mapboxgl.accessToken = mapBoxAccessCode;
 
@@ -18,8 +19,6 @@ const MapBox = () => {
   const [filteredLocations, setFilteredLocations] = useState([]);
 
   const navigate = useNavigate();
-
-  console.log(lng, lat);
 
   useEffect(() => {
     if (navigator.geolocation) {
@@ -57,7 +56,7 @@ const MapBox = () => {
         markerElement
           .querySelector(".popup-button")
           .addEventListener("click", () => {
-            navigate(`/location/${location.id}`, {
+            navigate(`/location/${location.place_id}`, {
               state: { location: location },
             });
           });
@@ -83,14 +82,18 @@ const MapBox = () => {
 
   useEffect(() => {
     if (search !== "") {
-      const filtered = dataMockTwo.filter((location) =>
-        location.name.toLowerCase().includes(search.toLowerCase())
-      );
-      setFilteredLocations(filtered);
+      getCoordinates(search)
+        .then((coordData) => {
+          return coordData;
+        })
+        .then((coordData) => {
+          getNearbyLocations(coordData, 2000).then((locations) => {
+            console.log(locations);
+            setFilteredLocations(locations);
+          });
+        });
     }
   }, [search]);
-
-  console.log(filteredLocations);
 
   return (
     <div>
