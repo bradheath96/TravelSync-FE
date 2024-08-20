@@ -6,6 +6,9 @@ import { dataMockTwo } from "../utils/mockData";
 import { useNavigate } from "react-router-dom";
 import SearchBar from "./SearchBar";
 import { getCoordinates, getNearbyLocations } from "../utils/axios";
+import Slider from "@mui/material/Slider";
+import debounce from "lodash.debounce";
+import TypeMenu from "./TypeMenu";
 
 mapboxgl.accessToken = mapBoxAccessCode;
 
@@ -15,8 +18,12 @@ const MapBox = () => {
 	const [lng, setLng] = useState(-2.2426);
 	const [lat, setLat] = useState(53.4808);
 	const [search, setSearch] = useState("");
+	const [mainLocation, setMainLocation] = useState(null);
 	const [markers, setMarkers] = useState([]);
 	const [filteredLocations, setFilteredLocations] = useState([]);
+	const [showNearby, setShowNearby] = useState(false);
+	const [radius, setRadius] = useState(2000);
+	const [type, setType] = useState("tourist_attraction");
 
 	const navigate = useNavigate();
 
@@ -43,8 +50,16 @@ const MapBox = () => {
 		setMarkers([]);
 
 		if (filteredLocations.length > 0) {
+			console.log(filteredLocations, "<<< FILTERED");
 			const bounds = new mapboxgl.LngLatBounds();
-			const newMarkers = filteredLocations.map((location) => {
+
+			const locationsToDisplay = showNearby
+				? filteredLocations
+				: mainLocation
+				? [mainLocation]
+				: [];
+
+			const newMarkers = locationsToDisplay.map((location) => {
 				const markerElement = document.createElement("div");
 				markerElement.innerHTML = `
 					<div class="popup-container">
@@ -79,7 +94,7 @@ const MapBox = () => {
 				duration: 1500,
 			});
 		}
-	}, [filteredLocations]);
+	}, [filteredLocations, showNearby]);
 
 	useEffect(() => {
 		if (search !== "") {
@@ -88,17 +103,48 @@ const MapBox = () => {
 					return coordData;
 				})
 				.then((coordData) => {
-					getNearbyLocations(coordData, 2000).then((locations) => {
-						console.log(locations);
+					getNearbyLocations(coordData, radius, type).then((locations) => {
+						setMainLocation(locations[0]);
 						setFilteredLocations(locations);
 					});
 				});
 		}
-	}, [search]);
+	}, [search, radius, type]);
+
+	const handleLocationOnClick = (event) => {
+		event.preventDefault();
+		setShowNearby(!showNearby);
+		console.log(showNearby, "<<< show locations");
+	};
+
+	const handleSliderChange = debounce((event, value) => {
+		setRadius(value);
+		if (!showNearby) {
+			setShowNearby(true);
+		}
+	}, 1);
 
 	return (
 		<div>
-			<SearchBar setSearch={setSearch} />
+			<SearchBar setType={setType} setSearch={setSearch} />
+			<button onClick={handleLocationOnClick}>
+				{showNearby ? "Hide Nearby Locations" : "Nearby Locations"}
+			</button>
+			{showNearby && (
+				<div>
+					<Slider
+						onChange={handleSliderChange}
+						aria-label="Radius"
+						value={radius}
+						valueLabelDisplay="auto"
+						step={100}
+						marks
+						min={200}
+						max={3000}
+					/>
+					<TypeMenu type={type} setType={setType} />
+				</div>
+			)}
 			<div
 				ref={mapContainer}
 				style={{ width: "100%", height: "500px" }}

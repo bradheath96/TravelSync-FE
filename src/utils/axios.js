@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const travelSyncAPI = axios.create({
-  baseURL: "https://travelsync-api.onrender.com/api",
+	baseURL: "https://travelsync-api-production.up.railway.app/api/",
 });
 
 export const getCoordinates = (addressStr) => {
@@ -13,10 +13,11 @@ export const getCoordinates = (addressStr) => {
     });
 };
 
-export const getNearbyLocations = (coords, radius) => {
+export const getNearbyLocations = (coords, radius, type) => {
+  console.log(type, "<<< axios")
   return travelSyncAPI
     .post(
-      `/places/nearby?location=${coords.lat}%2C${coords.lng}&radius=${radius}`
+      `/places/nearby?location=${coords.lat}%2C${coords.lng}&radius=${radius}&type=${type}`
     )
     .then((locations) => {
       return locations.data.locations;

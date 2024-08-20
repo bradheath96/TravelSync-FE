@@ -4,7 +4,7 @@ import { useState } from "react";
 import "../CSS/index.css"
 
 
-function SearchBar({setSearch}) {
+function SearchBar({setType, setSearch}) {
 	const [currSearch, setCurrSear] = useState("");
 
 	function handleChange(event) {
@@ -13,6 +13,7 @@ function SearchBar({setSearch}) {
 
 	function handleSubmit(event) {
 		event.preventDefault();
+		setType("tourist_attraction")
 		setSearch(currSearch);
 		setCurrSear("");
 	}
