@@ -6,11 +6,9 @@ import "../CSS/map_box.css";
 mapboxgl.accessToken = mapBoxAccessCode;
 
 const SmallMap = ({ location }) => {
-  console.log(location);
   const mapContainer = useRef(null);
   const map = useRef(null);
   useEffect(() => {
-    console.log(mapContainer);
     if (map.current) return;
     map.current = new mapboxgl.Map({
       container: mapContainer.current,

@@ -5,48 +5,63 @@ import "../CSS/map_box.css";
 import { dataMockTwo } from "../utils/mockData";
 import { useNavigate } from "react-router-dom";
 import SearchBar from "./SearchBar";
+import { getCoordinates, getNearbyLocations } from "../utils/axios";
+import Slider from "@mui/material/Slider";
+import debounce from "lodash.debounce";
+import TypeMenu from "./TypeMenu";
 
 mapboxgl.accessToken = mapBoxAccessCode;
 
 const MapBox = () => {
-  const mapContainer = useRef(null);
-  const map = useRef(null);
-  const [lng, setLng] = useState(-2.2426);
-  const [lat, setLat] = useState(53.4808);
-  const [search, setSearch] = useState("");
-  const [markers, setMarkers] = useState([]);
-  const [filteredLocations, setFilteredLocations] = useState([]);
+	const mapContainer = useRef(null);
+	const map = useRef(null);
+	const [lng, setLng] = useState(-2.2426);
+	const [lat, setLat] = useState(53.4808);
+	const [search, setSearch] = useState("");
+	const [mainLocation, setMainLocation] = useState(null);
+	const [markers, setMarkers] = useState([]);
+	const [filteredLocations, setFilteredLocations] = useState([]);
+	const [showNearby, setShowNearby] = useState(false);
+	const [radius, setRadius] = useState(2000);
+	const [type, setType] = useState("tourist_attraction");
 
-  const navigate = useNavigate();
+	const navigate = useNavigate();
 
-  console.log(lng, lat);
+	useEffect(() => {
+		if (navigator.geolocation) {
+			navigator.geolocation.getCurrentPosition((position) => {
+				setLng(position.coords.longitude);
+				setLat(position.coords.latitude);
+			});
+		}
+	}, []);
 
-  useEffect(() => {
-    if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition((position) => {
-        setLng(position.coords.longitude);
-        setLat(position.coords.latitude);
-      });
-    }
-  }, []);
+	useEffect(() => {
+		map.current = new mapboxgl.Map({
+			container: mapContainer.current,
+			style: "mapbox://styles/mapbox/streets-v12",
+			center: [lng, lat],
+			zoom: 12,
+		});
+	}, [lng, lat]);
 
-  useEffect(() => {
-    map.current = new mapboxgl.Map({
-      container: mapContainer.current,
-      style: "mapbox://styles/mapbox/streets-v12",
-      center: [lng, lat],
-      zoom: 12,
-    });
-  }, [lng, lat]);
+	useEffect(() => {
+		markers.forEach((marker) => marker.remove());
+		setMarkers([]);
 
-  useEffect(() => {
-    setMarkers([]);
+		if (filteredLocations.length > 0) {
+			console.log(filteredLocations, "<<< FILTERED");
+			const bounds = new mapboxgl.LngLatBounds();
 
-    if (filteredLocations.length > 0) {
-      const bounds = new mapboxgl.LngLatBounds();
-      const newMarkers = filteredLocations.map((location) => {
-        const markerElement = document.createElement("div");
-        markerElement.innerHTML = `
+			const locationsToDisplay = showNearby
+				? filteredLocations
+				: mainLocation
+				? [mainLocation]
+				: [];
+
+			const newMarkers = locationsToDisplay.map((location) => {
+				const markerElement = document.createElement("div");
+				markerElement.innerHTML = `
 					<div class="popup-container">
 						<h4 class="popup-title">${location.name}</h4>
 						<p>Rating: ${location.rating}</p>
@@ -54,54 +69,89 @@ const MapBox = () => {
 					</div>
 				`;
 
-        markerElement
-          .querySelector(".popup-button")
-          .addEventListener("click", () => {
-            navigate(`/location/${location.id}`, {
-              state: { location: location },
-            });
-          });
+				markerElement
+					.querySelector(".popup-button")
+					.addEventListener("click", () => {
+						navigate(`/location/${location.place_id}`, {
+							state: { location: location },
+						});
+					});
 
-        const marker = new mapboxgl.Marker()
-          .setLngLat([location["co-ords"].lng, location["co-ords"].lat])
-          .setPopup(new mapboxgl.Popup().setDOMContent(markerElement))
-          .addTo(map.current);
+				const marker = new mapboxgl.Marker()
+					.setLngLat([location["co-ords"].lng, location["co-ords"].lat])
+					.setPopup(new mapboxgl.Popup().setDOMContent(markerElement))
+					.addTo(map.current);
 
-        bounds.extend([location["co-ords"].lng, location["co-ords"].lat]);
+				bounds.extend([location["co-ords"].lng, location["co-ords"].lat]);
 
-        return marker;
-      });
-      setMarkers(newMarkers);
+				return marker;
+			});
+			setMarkers(newMarkers);
 
-      map.current.fitBounds(bounds, {
-        padding: 40,
-        maxZoom: 14,
-        duration: 1500,
-      });
-    }
-  }, [filteredLocations]);
+			map.current.fitBounds(bounds, {
+				padding: 40,
+				maxZoom: 14,
+				duration: 1500,
+			});
+		}
+	}, [filteredLocations, showNearby]);
 
-  useEffect(() => {
-    if (search !== "") {
-      const filtered = dataMockTwo.filter((location) =>
-        location.name.toLowerCase().includes(search.toLowerCase())
-      );
-      setFilteredLocations(filtered);
-    }
-  }, [search]);
+	useEffect(() => {
+		if (search !== "") {
+			getCoordinates(search)
+				.then((coordData) => {
+					return coordData;
+				})
+				.then((coordData) => {
+					getNearbyLocations(coordData, radius, type).then((locations) => {
+						setMainLocation(locations[0]);
+						setFilteredLocations(locations);
+					});
+				});
+		}
+	}, [search, radius, type]);
 
-  console.log(filteredLocations);
+	const handleLocationOnClick = (event) => {
+		event.preventDefault();
+		setShowNearby(!showNearby);
+		console.log(showNearby, "<<< show locations");
+	};
 
-  return (
-    <div>
-      <SearchBar setSearch={setSearch} />
-      <div
-        ref={mapContainer}
-        style={{ width: "100%", height: "500px" }}
-        className="map-container"
-      />
-    </div>
-  );
+	const handleSliderChange = debounce((event, value) => {
+		setRadius(value);
+		if (!showNearby) {
+			setShowNearby(true);
+		}
+	}, 1);
+
+	return (
+		<div>
+			<SearchBar setType={setType} setSearch={setSearch} />
+			<button onClick={handleLocationOnClick}>
+				{showNearby ? "Hide Nearby Locations" : "Nearby Locations"}
+			</button>
+			{showNearby && (
+				<div>
+					<Slider
+						onChange={handleSliderChange}
+						aria-label="Radius"
+						value={radius}
+						valueLabelDisplay="auto"
+						step={100}
+						marks
+						min={200}
+						max={3000}
+					/>
+					<TypeMenu type={type} setType={setType} />
+				</div>
+			)}
+			<div
+				ref={mapContainer}
+				style={{ width: "100%", height: "500px" }}
+				className="map-container"
+			/>
+		</div>
+	);
 };
 
 export default MapBox;
