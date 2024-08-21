@@ -3,6 +3,8 @@ import React, { useRef, useEffect, useState } from "react";
 import { getNearbyLocations, getSingleLocation } from "../utils/axios";
 import LargeMap from "./LargeMap";
 import TypeMenu from "./TypeMenu";
+import debounce from "lodash.debounce";
+import Slider from "@mui/material/Slider";
 
 export default function MapPage() {
   const [search, setSearch] = useState("");
@@ -11,37 +13,56 @@ export default function MapPage() {
   const [radius, setRadius] = useState(2000);
   const [type, setType] = useState("tourist_attraction");
   const [showNearby, setShowNearby] = useState(false);
+  const [lng, setLng] = useState(-2.2426);
+  const [lat, setLat] = useState(53.4808);
+
+  useEffect(() => {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition((position) => {
+        setLng(position.coords.longitude);
+        setLat(position.coords.latitude);
+      });
+    }
+  }, []);
 
   useEffect(() => {
     if (search !== "") {
+      setShowNearby(false);
       getSingleLocation(search).then((mainLocationData) => {
         setMainLocation(mainLocationData);
-        setLocationsList(mainLocation);
+        setLocationsList([mainLocationData]);
       });
     }
   }, [search]);
 
   const handleChangeSearchModeOnClick = (event) => {
     event.preventDefault();
-    setShowNearby(!showNearby);
-    if (showNearby) {
-      getNearbyLocations(mainLocation.geometry.locations, radius, type).then(
+    const newShowNearby = showNearby ? false : true;
+    setShowNearby(newShowNearby);
+    if (newShowNearby) {
+      getNearbyLocations(mainLocation.geometry.location, radius, type).then(
         (nearbyLocations) => {
           setLocationsList([locationsList[0], ...nearbyLocations]);
+          console.log(locationsList);
         }
       );
+    } else {
+      setLocationsList([mainLocation]);
     }
   };
 
   const handleSliderChange = debounce((event, value) => {
     event.preventDefault();
     setRadius(value);
-    getNearbyLocations(mainLocation.geometry.locations, radius, type).then(
+  }, 1);
+
+  useEffect(() => {
+    getNearbyLocations(mainLocation.geometry.location, radius, type).then(
       (nearbyLocations) => {
         setLocationsList([locationsList[0], ...nearbyLocations]);
       }
     );
-  }, 1);
+  }, [radius, type]);
 
   return (
     <div>
@@ -64,7 +85,7 @@ export default function MapPage() {
           <TypeMenu type={type} setType={setType} />
         </div>
       )}
-      <LargeMap locationList={locationsList} />
+      <LargeMap locationsList={locationsList} lat={lat} lng={lng} />
     </div>
   );
 }

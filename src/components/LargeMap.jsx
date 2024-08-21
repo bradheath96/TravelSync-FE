@@ -2,24 +2,14 @@ import React, { useRef, useEffect, useState } from "react";
 import mapboxgl from "mapbox-gl";
 import mapBoxAccessCode from "../utils/map_box_access_key";
 import "../CSS/map_box.css";
+import { ContentCopySharp } from "@mui/icons-material";
 
 mapboxgl.accessToken = mapBoxAccessCode;
 
-export default function LargeMap({ locationsList }) {
+export default function LargeMap({ locationsList, lat, lng }) {
   const mapContainer = useRef(null);
   const map = useRef(null);
-  const [lng, setLng] = useState(-2.2426);
-  const [lat, setLat] = useState(53.4808);
-  const [markers, setMarkers] = useState([]);
-
-  useEffect(() => {
-    if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition((position) => {
-        setLng(position.coords.longitude);
-        setLat(position.coords.latitude);
-      });
-    }
-  }, []);
+  const markers = useRef([]);
 
   useEffect(() => {
     map.current = new mapboxgl.Map({
@@ -31,13 +21,15 @@ export default function LargeMap({ locationsList }) {
   }, [lng, lat]);
 
   useEffect(() => {
-    markers.forEach((marker) => marker.remove());
-    setMarkers([]);
+    if (markers.current) {
+      markers.current.forEach((marker) => marker.remove());
+    }
 
-    if (filteredLocations.length > 0) {
+    console.log(mapboxgl);
+    if (locationsList && locationsList.length > 0) {
       const bounds = new mapboxgl.LngLatBounds();
 
-      const newMarkers = locationsList.map((location) => {
+      locationsList.forEach((location) => {
         const markerElement = document.createElement("div");
         markerElement.innerHTML = `
                 <div class="popup-container">
@@ -54,16 +46,20 @@ export default function LargeMap({ locationsList }) {
           });
 
         const marker = new mapboxgl.Marker()
-          .setLngLat([location["co-ords"].lng, location["co-ords"].lat])
+          .setLngLat([
+            location.geometry.location.lng,
+            location.geometry.location.lat,
+          ])
           .setPopup(new mapboxgl.Popup().setDOMContent(markerElement))
           .addTo(map.current);
 
-        bounds.extend([location["co-ords"].lng, location["co-ords"].lat]);
+        markers.current.push(marker);
 
-        return marker;
+        bounds.extend([
+          location.geometry.location.lng,
+          location.geometry.location.lat,
+        ]);
       });
-      setMarkers(newMarkers);
-
       map.current.fitBounds(bounds, {
         padding: 40,
         maxZoom: 14,
