@@ -37,16 +37,8 @@ export default function MapPage() {
 
   const handleChangeSearchModeOnClick = (event) => {
     event.preventDefault();
-    const newShowNearby = showNearby ? false : true;
-    setShowNearby(newShowNearby);
-    if (newShowNearby) {
-      getNearbyLocations(mainLocation.geometry.location, radius, type).then(
-        (nearbyLocations) => {
-          setLocationsList([locationsList[0], ...nearbyLocations]);
-          console.log(locationsList);
-        }
-      );
-    } else {
+    setShowNearby(!showNearby);
+    if (showNearby) {
       setLocationsList([mainLocation]);
     }
   };
@@ -57,12 +49,15 @@ export default function MapPage() {
   }, 1);
 
   useEffect(() => {
-    getNearbyLocations(mainLocation.geometry.location, radius, type).then(
-      (nearbyLocations) => {
-        setLocationsList([locationsList[0], ...nearbyLocations]);
-      }
-    );
-  }, [radius, type]);
+    if (showNearby) {
+      getNearbyLocations(mainLocation.geometry.location, radius, type).then(
+        (nearbyLocations) => {
+          setLocationsList([locationsList[0], ...nearbyLocations]);
+          console.log(locationsList);
+        }
+      );
+    }
+  }, [radius, type, showNearby]);
 
   return (
     <div>

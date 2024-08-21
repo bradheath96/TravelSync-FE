@@ -1,21 +1,25 @@
 import { useEffect, useState } from "react";
 import SmallMap from "./SmallMap";
-
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { getPlaceDetail } from "../utils/axios";
 
 const LocationDetail = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [placeDetail, setPlaceDetail] = useState([]);
   const [isError, setIsError] = useState(false);
+  const navigate = useNavigate();
 
-  const place_id = useParams();
+  const { place_id } = useParams();
 
   useEffect(() => {
     setIsLoading(true);
     getPlaceDetail(place_id)
       .then((placeDetail) => {
         setIsLoading(false);
+        const typeWords = placeDetail.types[0].split("_").map((word) => {
+          return word[0].toUpperCase() + word.slice(1);
+        });
+        placeDetail.type = typeWords.join(" ");
         setPlaceDetail(placeDetail);
       })
       .catch((err) => {
@@ -24,6 +28,10 @@ const LocationDetail = () => {
       });
   }, [place_id]);
 
+  function handleReturnToSearch() {
+    navigate(`/`);
+  }
+
   return isError ? (
     "Error fetching place detail"
   ) : isLoading ? (
@@ -31,15 +39,26 @@ const LocationDetail = () => {
   ) : (
     <div>
       <h1>{placeDetail.name}</h1>
-      <p>{placeDetail.description}</p>
-      <h3>Rating: {placeDetail.rating}</h3>
-      <h4>Opening Times: {placeDetail.openingTimes}</h4>
+      <h3>{placeDetail.type}</h3>
+      {placeDetail.editorial_summary && (
+        <p>{placeDetail.editorial_summary.overview}</p>
+      )}
+      {placeDetail.rating && <h3>Rating: {placeDetail.rating}</h3>}
+      {placeDetail.opening_hours && (
+        <ul>
+          <h4>Opening Times:</h4>
+          {placeDetail.opening_hours.weekday_text.map((day) => (
+            <li key={day}>{day}</li>
+          ))}
+        </ul>
+      )}
       <SmallMap
         location={{
           name: placeDetail.name,
           "co-ords": placeDetail.geometry.location,
         }}
       />
+      <button onClick={handleReturnToSearch}>return to search</button>
     </div>
   );
 };

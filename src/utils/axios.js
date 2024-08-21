@@ -15,9 +15,9 @@ export const getSingleLocation = (addressStr) => {
 
 export const getPlaceDetail = (place_id) => {
   return travelSyncAPI
-    .post(`/places/detail?place_id={place_id}`)
+    .post(`/places/detail?place_id=${place_id}`)
     .then((placeDetail) => {
-      return placeDetail;
+      return placeDetail.data.details;
     });
 };
 

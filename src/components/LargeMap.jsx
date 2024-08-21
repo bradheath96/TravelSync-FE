@@ -3,13 +3,15 @@ import mapboxgl from "mapbox-gl";
 import mapBoxAccessCode from "../utils/map_box_access_key";
 import "../CSS/map_box.css";
 import { ContentCopySharp } from "@mui/icons-material";
-
+import { useNavigate } from "react-router-dom";
 mapboxgl.accessToken = mapBoxAccessCode;
 
 export default function LargeMap({ locationsList, lat, lng }) {
   const mapContainer = useRef(null);
   const map = useRef(null);
   const markers = useRef([]);
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     map.current = new mapboxgl.Map({
@@ -25,7 +27,6 @@ export default function LargeMap({ locationsList, lat, lng }) {
       markers.current.forEach((marker) => marker.remove());
     }
 
-    console.log(mapboxgl);
     if (locationsList && locationsList.length > 0) {
       const bounds = new mapboxgl.LngLatBounds();
 
@@ -42,6 +43,7 @@ export default function LargeMap({ locationsList, lat, lng }) {
         markerElement
           .querySelector(".popup-button")
           .addEventListener("click", () => {
+            console.log(location.place_id);
             navigate(`/location/${location.place_id}`);
           });
 
