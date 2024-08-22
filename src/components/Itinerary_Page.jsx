@@ -12,8 +12,17 @@ const ItineraryPage = () => {
 		return event
 	})
 	const key = column.id
+
+	function onDragEnd(result){
+		//Todolater
+	}
+
+	
 	return (
-		<Column key={key} column={column} events={events}/>
+		<DragDropContext onDragEnd={onDragEnd}>
+			<Column key={key} column={column} events={events}/>
+		</DragDropContext>
+		
 	);
 };
 
