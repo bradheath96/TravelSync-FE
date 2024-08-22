@@ -7,24 +7,24 @@ const Container = styled.div`
   border-radius: 2px;
   padding: 8px;
   margin-bottom: 8px;
+  background-color: pink;
 `;
 
-function Event({ eventId, eventName, index }) {
-  console.log(eventId);
+function Event({ eventId, eventName, eventRating, index }) {
 
   return (
-    <Draggable draggableId={eventId} index={index}>
-      {(provided) => (
-        <Container
-          {...provided.draggableProps}
-          {...provided.dragHandleProps}
-          innerRef={provided.innerRef}
-        >
-          {eventName}
-        </Container>
-      )}
-    </Draggable>
-  );
+		<Draggable draggableId={String(eventId)} index={index}>
+			{(provided) => (
+				<Container
+					{...provided.draggableProps}
+					{...provided.dragHandleProps}
+					ref={provided.innerRef}>
+					<h4>{eventName}</h4>
+					<p>Rating: {eventRating}</p>
+				</Container>
+			)}
+		</Draggable>
+	);
 }
 
 export default Event;
