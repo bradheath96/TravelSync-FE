@@ -46,7 +46,8 @@ export default function MapPage() {
   const handleSliderChange = debounce((event, value) => {
     event.preventDefault();
     setRadius(value);
-  }, 1);
+    console.log(locationsList)
+  }, 500);
 
   useEffect(() => {
     if (showNearby) {
@@ -74,7 +75,7 @@ export default function MapPage() {
             valueLabelDisplay="auto"
             step={100}
             marks
-            min={200}
+            min={100}
             max={3000}
           />
           <TypeMenu type={type} setType={setType} />
