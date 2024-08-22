@@ -11,7 +11,8 @@ const ItineraryPage = () => {
 	);
 	const key = column.id;
 
-	function onDragEnd(result) {
+    function onDragEnd(result) {
+        console.log(result)
 		const { destination, source, draggableId } = result;
 
 		if (!destination) {
@@ -45,7 +46,6 @@ const ItineraryPage = () => {
 			...prevState,
 			column: newColumn,
 		}));
-		console.log(tablesData.column);
 	}
 
 	return (
