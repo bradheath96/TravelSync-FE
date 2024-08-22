@@ -1,8 +1,20 @@
 import { DragDropContext } from "react-beautiful-dnd";
+import dataMockForTables from "../utils/mockData";
+import {useState} from "react"
+import Column from "./Column"
 
 
 const ItineraryPage = () => {
-	return <h1>Hello from itinerary</h1>;
+
+	const [tablesData, setTablesData] = useState(dataMockForTables)
+	const column = tablesData.column
+	const events = tablesData.events.map((event) => {
+		return event
+	})
+	const key = column.id
+	return (
+		<Column key={key} column={column} events={events}/>
+	);
 };
 
 export default ItineraryPage;
