@@ -1,20 +1,26 @@
 import SearchBar from "./SearchBar";
-import React, { useRef, useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { getNearbyLocations, getSingleLocation } from "../utils/axios";
 import LargeMap from "./LargeMap";
 import TypeMenu from "./TypeMenu";
 import debounce from "lodash.debounce";
 import Slider from "@mui/material/Slider";
+import { LocationContext } from "./LocationsContextProvider";
 
 export default function MapPage() {
   const [search, setSearch] = useState("");
-  const [mainLocation, setMainLocation] = useState(null);
-  const [locationsList, setLocationsList] = useState([]);
+
+  const { locationsList, setLocationsList } = useContext(LocationContext);
+  const [mainLocation, setMainLocation] = useState(
+    locationsList ? locationsList[0] : null
+  );
   const [radius, setRadius] = useState(2000);
   const [type, setType] = useState("tourist_attraction");
   const [showNearby, setShowNearby] = useState(false);
   const [lng, setLng] = useState(-2.2426);
   const [lat, setLat] = useState(53.4808);
+
+  console.log(locationsList);
 
   useEffect(() => {
     if (navigator.geolocation) {
@@ -46,7 +52,7 @@ export default function MapPage() {
   const handleSliderChange = debounce((event, value) => {
     event.preventDefault();
     setRadius(value);
-    console.log(locationsList)
+    console.log(locationsList);
   }, 500);
 
   useEffect(() => {
@@ -63,7 +69,10 @@ export default function MapPage() {
   return (
     <div>
       <SearchBar setSearch={setSearch} />
-      <button onClick={handleChangeSearchModeOnClick} disabled={!mainLocation}>
+      <button
+        onClick={handleChangeSearchModeOnClick}
+        disabled={!mainLocation && locationsList.length < 1}
+      >
         {showNearby ? "Hide Nearby Locations" : "Nearby Locations"}
       </button>
       {showNearby && (
