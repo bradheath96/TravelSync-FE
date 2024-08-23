@@ -23,7 +23,7 @@ export default function MapPage() {
   console.log(locationsList);
 
   useEffect(() => {
-    if (navigator.geolocation) {
+    if (locationsList.length < 1 && navigator.geolocation) {
       navigator.geolocation.getCurrentPosition((position) => {
         setLng(position.coords.longitude);
         setLat(position.coords.latitude);
