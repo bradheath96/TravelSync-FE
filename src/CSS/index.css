@@ -1,9 +1,46 @@
-.map-container {
-  height: 400px;
-  display: flex;
+@import "./map_page.css";
+@import "./styled_button.css";
+@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+
+:root {
+  /* --background-color: #faf9f5; */
+  --text-color: #5e6472;
+  --light-text-color: #faf9f5;
+  --primary-color: #ffa69e;
+  --secondary-color: #74beca;
+  --tertiary-color: #c5ebc3;
+  --mainpin-color: #c5ebc3;
+  --quad-color: #e4f6e3;
+  --background-color: #f0faef;
 }
 
-.search-bar {
-  display: flex;
-  justify-content: center;
+* {
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  width: 100%;
+  height: 100%;
+  scroll-behavior: smooth;
+}
+
+body {
+  margin-left: 20px;
+  margin-right: 20px;
+  padding-top: 40px;
+  padding-bottom: 40px;
+  height: 100vh;
+  box-sizing: border-box;
+  background-color: var(--background-color);
+  font-family: "Poppins", sans-serif;
+  font-weight: 200;
+  font-style: light;
+  color: var(--text-color);
+}
+
+.app-container,
+#root {
+  height: 100%;
+  width: 100%;
 }

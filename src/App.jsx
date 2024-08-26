@@ -8,12 +8,14 @@ import { LocationsContextProvider } from "./components/LocationsContextProvider"
 function App() {
   return (
     <LocationsContextProvider>
-      <Routes>
-        {/* Change this path later */}
-        <Route path="/" element={<MapPage className="map-container" />} />
-        <Route path="/location/:place_id" element={<LocationDetail />} />
-        <Route path="itinerary_page" element={<ItineraryPage />} />
-      </Routes>
+      <div className="app-container">
+        <Routes className="app-container">
+          {/* Change this path later */}
+          <Route path="/" element={<MapPage className="map-container" />} />
+          <Route path="/location/:place_id" element={<LocationDetail />} />
+          <Route path="/itinerary_page" element={<ItineraryPage />} />
+        </Routes>
+      </div>
     </LocationsContextProvider>
   );
 }

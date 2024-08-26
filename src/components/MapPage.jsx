@@ -6,9 +6,11 @@ import TypeMenu from "./TypeMenu";
 import debounce from "lodash.debounce";
 import Slider from "@mui/material/Slider";
 import { LocationContext } from "./LocationsContextProvider";
+import { useNavigate } from "react-router-dom";
 
 export default function MapPage() {
   const [search, setSearch] = useState("");
+  const navigate = useNavigate();
 
   const { locationsList, setLocationsList } = useContext(LocationContext);
   const [mainLocation, setMainLocation] = useState(
@@ -66,31 +68,45 @@ export default function MapPage() {
     }
   }, [radius, type, showNearby]);
 
+  function handleGoToItineraryClick() {
+    navigate(`/itinerary_page`);
+  }
+
   return (
-    <div>
+    <div className="mapPage">
       <SearchBar setSearch={setSearch} />
-      <button
-        onClick={handleChangeSearchModeOnClick}
-        disabled={!mainLocation && locationsList.length < 1}
-      >
-        {showNearby ? "Hide Nearby Locations" : "Nearby Locations"}
-      </button>
+      <div className="nearbyAndType">
+        <button
+          className={showNearby ? "styled-button hide" : "styled-button"}
+          onClick={handleChangeSearchModeOnClick}
+          disabled={!mainLocation && locationsList.length < 1}
+        >
+          {showNearby ? "Hide Nearby Locations" : "Nearby Locations"}
+        </button>
+        {showNearby && <TypeMenu type={type} setType={setType} />}
+      </div>
       {showNearby && (
-        <div>
-          <Slider
-            onChange={handleSliderChange}
-            aria-label="Radius"
-            value={radius}
-            valueLabelDisplay="auto"
-            step={100}
-            marks
-            min={100}
-            max={3000}
-          />
-          <TypeMenu type={type} setType={setType} />
-        </div>
+        <Slider
+          onChange={handleSliderChange}
+          aria-label="Radius"
+          value={radius}
+          valueLabelDisplay="auto"
+          step={100}
+          marks
+          min={100}
+          max={3000}
+        />
       )}
-      <LargeMap locationsList={locationsList} lat={lat} lng={lng} />
+
+      <LargeMap
+        className="largeMap"
+        locationsList={locationsList}
+        lat={lat}
+        lng={lng}
+      />
+      <button className="styled-button" onClick={handleGoToItineraryClick}>
+        Itinerary
+      </button>
     </div>
   );
 }

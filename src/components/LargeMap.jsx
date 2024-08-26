@@ -4,39 +4,40 @@ import mapBoxAccessCode from "../utils/map_box_access_key";
 import "../CSS/map_box.css";
 import { ContentCopySharp } from "@mui/icons-material";
 import { useNavigate } from "react-router-dom";
+import { colors } from "@mui/material";
 mapboxgl.accessToken = mapBoxAccessCode;
 
 export default function LargeMap({ locationsList, lat, lng }) {
-	const mapContainer = useRef(null);
-	const map = useRef(null);
-	const markers = useRef([]);
+  const mapContainer = useRef(null);
+  const map = useRef(null);
+  const markers = useRef([]);
 
-	const navigate = useNavigate();
+  const navigate = useNavigate();
 
-	useEffect(() => {
-		map.current = new mapboxgl.Map({
-			container: mapContainer.current,
-			style: "mapbox://styles/mapbox/streets-v12",
-			center: [lng, lat],
-			zoom: 12,
-		});
-	}, [lng, lat]);
+  useEffect(() => {
+    map.current = new mapboxgl.Map({
+      container: mapContainer.current,
+      style: "mapbox://styles/mapbox/streets-v12",
+      center: [lng, lat],
+      zoom: 12,
+    });
+  }, [lng, lat]);
 
-	useEffect(() => {
-		if (markers.current) {
-			markers.current.forEach((marker) => marker.remove());
-		}
+  useEffect(() => {
+    if (markers.current) {
+      markers.current.forEach((marker) => marker.remove());
+    }
 
-		if (locationsList && locationsList.length > 0) {
-			const bounds = new mapboxgl.LngLatBounds();
+    if (locationsList && locationsList.length > 0) {
+      const bounds = new mapboxgl.LngLatBounds();
 
-			locationsList.forEach((location) => {
-				const markerElement = document.createElement("div");
+      locationsList.forEach((location, index) => {
+        const markerElement = document.createElement("div");
 
-				const locationRating = location.rating
-					? `<p> Rating: ${location.rating} </p>`
-					: "";
-				markerElement.innerHTML = `
+        const locationRating = location.rating
+          ? `<p> Rating: ${location.rating} </p>`
+          : "";
+        markerElement.innerHTML = `
                 <div class="popup-container">
                     <h4 class="popup-title">${location.name}</h4>
                     ${locationRating}
@@ -44,41 +45,43 @@ export default function LargeMap({ locationsList, lat, lng }) {
                 </div>
             `;
 
-				markerElement
-					.querySelector(".popup-button")
-					.addEventListener("click", () => {
-						console.log(location.place_id);
-						navigate(`/location/${location.place_id}`);
-					});
+        markerElement
+          .querySelector(".popup-button")
+          .addEventListener("click", () => {
+            console.log(location.place_id);
+            navigate(`/location/${location.place_id}`);
+          });
 
-				const marker = new mapboxgl.Marker()
-					.setLngLat([
-						location.geometry.location.lng,
-						location.geometry.location.lat,
-					])
-					.setPopup(new mapboxgl.Popup().setDOMContent(markerElement))
-					.addTo(map.current);
+        const markerColor = index === 0 ? "#77d072" : "#ffa69e";
 
-				markers.current.push(marker);
+        const marker = new mapboxgl.Marker({ color: markerColor })
+          .setLngLat([
+            location.geometry.location.lng,
+            location.geometry.location.lat,
+          ])
+          .setPopup(new mapboxgl.Popup().setDOMContent(markerElement))
+          .addTo(map.current);
 
-				bounds.extend([
-					location.geometry.location.lng,
-					location.geometry.location.lat,
-				]);
-			});
-			map.current.fitBounds(bounds, {
-				padding: 40,
-				maxZoom: 14,
-				duration: 1500,
-			});
-		}
-	}, [locationsList]);
+        markers.current.push(marker);
 
-	return (
-		<div
-			ref={mapContainer}
-			style={{ width: "100%", height: "500px" }}
-			className="map-container"
-		/>
-	);
+        bounds.extend([
+          location.geometry.location.lng,
+          location.geometry.location.lat,
+        ]);
+      });
+      map.current.fitBounds(bounds, {
+        padding: 40,
+        maxZoom: 14,
+        duration: 1500,
+      });
+    }
+  }, [locationsList]);
+
+  return (
+    <div
+      ref={mapContainer}
+      style={{ width: "100%", height: "500px" }}
+      className="map-container"
+    />
+  );
 }
