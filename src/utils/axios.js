@@ -40,3 +40,14 @@ export const postGroups = (groupName) => {
     return group.data.groups
   })
 }
+
+export const joinGroups = (userId, joinCode) => {
+  return travelSyncAPI.post(`/group_members/join`, {
+    "user_id": userId,
+    "join_code": joinCode
+  })
+  .then((response) => {
+    console.log(response.data)
+    return response.data
+  })
+}
