@@ -34,12 +34,25 @@ export const getNearbyLocations = (coords, radius, type) => {
 };
 
 export const postGroups = (groupName) => {
-  console.log(groupName, "axios input");
-  return travelSyncAPI.post(`/groups`, { groupName }).then((group) => {
-    console.log(group, "<<<axios");
-    return group.data.groups;
-  });
-};
+
+  console.log(groupName, "axios input")
+  return travelSyncAPI.post(`/groups`, {groupName})
+  .then((group) => {
+    console.log(group, "<<<axios")
+    return group.data.groups
+  })
+}
+
+export const joinGroups = (userId, joinCode) => {
+  return travelSyncAPI.post(`/group_members/join`, {
+    "user_id": userId,
+    "join_code": joinCode
+  })
+  .then((response) => {
+    console.log(response.data)
+    return response.data
+  })
+}
 
 export const getUserGroups = (user_id) => {
   console.log(user_id);
@@ -54,3 +67,4 @@ export const getItineraryByGroupId = (group_id) => {
     return data;
   });
 };
+
