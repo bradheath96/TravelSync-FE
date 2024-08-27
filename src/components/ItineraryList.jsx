@@ -1,32 +1,44 @@
 import { DragDropContext } from "react-beautiful-dnd";
 import { useState, useEffect } from "react";
 import Column from "./Column";
-import { getItineraryEvents } from "../utils/axios";
+import { getItineraryEvents, getItineraryByItineraryID, updateItineraryOrder } from "../utils/axios";
 
-const ItineraryList = () => {
+const ItineraryList = ({ itinerary_id }) => {
 	const [tablesData, setTablesData] = useState(null);
+	const [itineraryOrder, setItineraryOrder] = useState([]);
+	const [itineraryEvents, setItineraryEvents] = useState([]);
+	const [itineraryEventsDisplay, setItineraryEventsDisplay] = useState([]);
 
 	useEffect(() => {
-		const fetchData = () => {
-			getItineraryEvents(1) // will change when the itinerary id is updated
-				.then((events) => {
-					const eventIds = events.map((event) => event.id);
-					const data = {
-						column: {
-							id: "column-1",
-							title: "Itinerary",
-							event_ids: eventIds,
-						},
-						events: events,
-					};
-					setTablesData(data);
-				})
-				.catch((error) => {
-					console.error("Error fetching data:", error);
+		getItineraryByItineraryID(itinerary_id)
+			.then((itinerary) => {
+				setItineraryOrder(itinerary.itinerary_order);
+				getItineraryEvents(itinerary_id).then((events) => {
+					setItineraryEvents(events);
+					const displayData = events.map((event) => {
+						return {
+                            name: event.name,
+                            id: event.id
+						};
+					});
+					setItineraryEventsDisplay(displayData);
 				});
-		};
+			})
+			.catch((error) => {
+				console.error("Error fetching data:", error);
+			});
+	}, []);
 
-		fetchData();
+	useEffect(() => {
+		const data = {
+			column: {
+				id: itinerary_id,
+				title: "Itinerary",
+				event_ids: itineraryOrder,
+			},
+			events: itineraryEventsDisplay,
+		};
+		setTablesData(data);
 	}, []);
 
 	if (!tablesData) {
@@ -60,18 +72,21 @@ const ItineraryList = () => {
 			title: "itinerary",
 			event_ids: newEventIds,
 		};
-		console.log(newColumn.event_ids, "<<<< new position");
+        console.log(newColumn.event_ids, "<<<< new position");
+        updateItineraryOrder(itinerary_id, newColumn.event_ids).then((itinerary) => {
+            setItineraryOrder(itinerary.itinerary_order)
+        });
 
 		setTablesData((prevState) => ({
 			...prevState,
 			column: newColumn,
 		}));
 	}
-
+    console.log(tablesData.column.event_ids, "<<< ids");
 	return (
 		<DragDropContext onDragEnd={onDragEnd}>
 			<Column
-				key={tablesData.column.event_ids}
+				key={tablesData.column.id}
 				column={tablesData.column.id}
 				events={tablesData.events}
 			/>

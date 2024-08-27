@@ -26,12 +26,12 @@ function Column({ column, events }) {
         {(provided) => (
           <EventList ref={provided.innerRef} {...provided.droppableProps}>
             {events.map((event, index) => {
+              console.log(event)
               return (
                 <Event
                   key={event.id}
                   eventId={event.id}
                   eventName={event.name}
-                  eventRating={event.rating}
                   index={index}
                 />
               );

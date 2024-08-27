@@ -1,7 +1,6 @@
 import React, { useEffect, useState, useContext } from "react";
 import { UserContext } from "./UserContextProvider";
 import { getItineraryByGroupId, getUserGroups } from "../utils/axios";
-import ItineraryList from "./Itinerary_List";
 import { useNavigate } from "react-router-dom";
 
 export default function UserGroupsList() {
@@ -39,13 +38,14 @@ export default function UserGroupsList() {
     "groups loading..."
   ) : (
     <div>
-      <ul>
+      <ul >
         {userGroups.map((group) => (
-          <button onClick={() => handleEnterGroupItinerary(group.id)}>
-            <li key={group.id}>
-              <p>{group.name}</p>
-            </li>
-          </button>
+          
+          <li key={group.id}>
+            <button onClick={() => handleEnterGroupItinerary(group.id)}>
+            <p>{group.name}</p>
+            </button>
+          </li>
         ))}
       </ul>
     </div>
