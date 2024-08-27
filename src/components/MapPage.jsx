@@ -7,6 +7,7 @@ import debounce from "lodash.debounce";
 import Slider from "@mui/material/Slider";
 import { LocationContext } from "./LocationsContextProvider";
 import { useNavigate } from "react-router-dom";
+import HomeHeader from "./HomeHeader";
 
 export default function MapPage() {
   const [search, setSearch] = useState("");
@@ -74,6 +75,7 @@ export default function MapPage() {
 
   return (
     <div className="mapPage">
+      <HomeHeader />
       <SearchBar setSearch={setSearch} />
       <div className="nearbyAndType">
         <button

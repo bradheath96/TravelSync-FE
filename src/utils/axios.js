@@ -1,4 +1,5 @@
 import axios from "axios";
+import ItineraryList from "../components/Itinerary_List";
 
 const travelSyncAPI = axios.create({
   baseURL: "https://travelsync-api-production.up.railway.app/api/",
@@ -33,6 +34,7 @@ export const getNearbyLocations = (coords, radius, type) => {
 };
 
 export const postGroups = (groupName) => {
+
   console.log(groupName, "axios input")
   return travelSyncAPI.post(`/groups`, {groupName})
   .then((group) => {
@@ -51,3 +53,18 @@ export const joinGroups = (userId, joinCode) => {
     return response.data
   })
 }
+
+export const getUserGroups = (user_id) => {
+  console.log(user_id);
+  return travelSyncAPI.get(`/users/${user_id}/groups`).then((groups) => {
+    console.log(groups);
+    return groups.data;
+  });
+};
+
+export const getItineraryByGroupId = (group_id) => {
+  return travelSyncAPI.get(`groups/${group_id}/itinerary`).then(({ data }) => {
+    return data;
+  });
+};
+
