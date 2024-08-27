@@ -38,12 +38,11 @@ export default function UserGroupsList() {
     "groups loading..."
   ) : (
     <div>
-      <ul >
+      <ul>
         {userGroups.map((group) => (
-          
           <li key={group.id}>
             <button onClick={() => handleEnterGroupItinerary(group.id)}>
-            <p>{group.name}</p>
+              <p>{group.name}</p>
             </button>
           </li>
         ))}

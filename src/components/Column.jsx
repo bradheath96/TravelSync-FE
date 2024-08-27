@@ -25,17 +25,14 @@ function Column({ column, events }) {
       <Droppable droppableId={String(column.id)}>
         {(provided) => (
           <EventList ref={provided.innerRef} {...provided.droppableProps}>
-            {events.map((event, index) => {
-              console.log(event)
-              return (
-                <Event
-                  key={event.id}
-                  eventId={event.id}
-                  eventName={event.name}
-                  index={index}
-                />
-              );
-            })}
+            {events.map((event, index) => (
+              <Event
+                key={event.id}
+                eventId={event.id}
+                eventName={event.name}
+                index={index}
+              />
+            ))}
             {provided.placeholder}
           </EventList>
         )}
