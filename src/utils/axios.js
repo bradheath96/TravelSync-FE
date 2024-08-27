@@ -31,3 +31,12 @@ export const getNearbyLocations = (coords, radius, type) => {
       return locations.data.locations;
     });
 };
+
+export const postGroups = (groupName) => {
+  console.log(groupName, "axios input")
+  return travelSyncAPI.post(`/groups`, {groupName})
+  .then((group) => {
+    console.log(group, "<<<axios")
+    return group.data.groups
+  })
+}
