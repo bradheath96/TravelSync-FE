@@ -1,7 +1,6 @@
 import React, { useEffect, useState, useContext } from "react";
 import { UserContext } from "./UserContextProvider";
 import { getItineraryByGroupId, getUserGroups } from "../utils/axios";
-import ItineraryList from "./Itinerary_List";
 import { useNavigate } from "react-router-dom";
 
 export default function UserGroupsList() {
