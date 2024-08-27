@@ -1,0 +1,26 @@
+.styled-button {
+  width: auto;
+  height: auto;
+  padding: 10px;
+  box-sizing: content-box;
+
+  background-color: var(--primary-color);
+  color: var(--light-text-color);
+  border: none;
+  border-radius: 5px;
+  font-size: 12px;
+  font-weight: bold;
+  text-align: center;
+
+  cursor: pointer;
+  transition: background-color 0.2s ease, transform 0.2s ease,
+    box-shadow 0.2s ease;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+  position: relative;
+  overflow: hidden;
+}
+
+.styled-button.hide {
+  background-color: var(--tertiary-color);
+  color: var(--text-color);
+}

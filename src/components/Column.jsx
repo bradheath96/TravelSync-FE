@@ -5,8 +5,9 @@ import { Droppable } from "react-beautiful-dnd";
 
 const Container = styled.div`
   margin: 8px;
-  border: 1px solid black;
-  border-radius: 2px;
+  background-color: var(--quad-color);
+  padding: 15px;
+  border-radius: 8px;
 `;
 
 const Title = styled.h3`
@@ -18,7 +19,6 @@ const EventList = styled.div`
 `;
 
 function Column({ column, events }) {
-    
   return (
     <Container>
       <Title>{column.title}</Title>
@@ -27,14 +27,14 @@ function Column({ column, events }) {
           <EventList ref={provided.innerRef} {...provided.droppableProps}>
             {events.map((event, index) => {
               return (
-								<Event
-									key={event.id}
-									eventId={event.id}
+                <Event
+                  key={event.id}
+                  eventId={event.id}
                   eventName={event.name}
                   eventRating={event.rating}
-									index={index}
-								/>
-							);
+                  index={index}
+                />
+              );
             })}
             {provided.placeholder}
           </EventList>
