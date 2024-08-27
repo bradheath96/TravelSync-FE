@@ -1,5 +1,5 @@
 import React from "react";
-import ItineraryList from "./Itinerary_List";
+import ItineraryList from "./ItineraryList";
 import HomeHeader from "./HomeHeader";
 import { useParams } from "react-router-dom";
 
