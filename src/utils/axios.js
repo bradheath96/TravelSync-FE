@@ -97,3 +97,12 @@ export const updateItineraryOrder = (itinerary_id, itinerary_order) => {
       return data;
     });
 };
+
+export const uploadFile = (fileName, itineraryId) => {
+  return travelSyncAPI.post(`/${itineraryId}/files`, {
+    file_name: fileName
+  })
+  .then((response) => {
+    console.log(response, 'uploadFile response')
+  })
+}
