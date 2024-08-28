@@ -1,5 +1,6 @@
 // DraggableList.jsx
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
+import { GroupItineraryContext } from "./ItineraryContextProvider";
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 import {
   getItineraryByItineraryID,
@@ -7,15 +8,17 @@ import {
   updateItineraryOrder,
 } from "../utils/axios";
 
-const ItineraryList = ({ itinerary_id }) => {
+const ItineraryList = () => {
   const [events, setEvents] = useState([]);
   const [eventOrder, setEventOrder] = useState([]);
+  const { currentItineraryId } = useContext(GroupItineraryContext);
 
   useEffect(() => {
-    getItineraryByItineraryID(itinerary_id)
+    console.log(currentItineraryId);
+    getItineraryByItineraryID(currentItineraryId)
       .then(({ itinerary_order }) => {
         setEventOrder(itinerary_order);
-        return getItineraryEvents(itinerary_id);
+        return getItineraryEvents(currentItineraryId);
       })
       .then((eventList) => {
         setEvents(eventList);
@@ -23,7 +26,7 @@ const ItineraryList = ({ itinerary_id }) => {
       .catch((error) =>
         console.error("Error fetching itinerary details:", error)
       );
-  }, [itinerary_id]);
+  }, [currentItineraryId]);
 
   const onDragEnd = (result) => {
     const { destination, source } = result;
@@ -41,7 +44,7 @@ const ItineraryList = ({ itinerary_id }) => {
     setEventOrder(newEventOrder);
 
     // update database
-    updateItineraryOrder(itinerary_id, newEventOrder)
+    updateItineraryOrder(currentItineraryId, newEventOrder)
       .then((response) =>
         console.log("Itinerary order updated successfully:", response)
       )
@@ -100,7 +103,6 @@ const ItineraryList = ({ itinerary_id }) => {
           </div>
         )}
       </Droppable>
-
     </DragDropContext>
   );
 };

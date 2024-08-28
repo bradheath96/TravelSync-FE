@@ -1,15 +1,19 @@
 import React from "react";
 import ItineraryList from "./ItineraryList";
 import HomeHeader from "./HomeHeader";
-import { useParams } from "react-router-dom";
 import ReturnToMap from "./ReturnToMap";
+import { useContext } from "react";
+import { GroupItineraryContext } from "./ItineraryContextProvider";
 
 export default function Itinerary_Page() {
-  const { itinerary_id } = useParams();
+  const { currentGroup, currentItineraryTitle } = useContext(
+    GroupItineraryContext
+  );
   return (
-    <div>
+    <div className="itineraryPage">
       <HomeHeader />
-      <ItineraryList itinerary_id={itinerary_id} />
+      <h1 className="itineraryTitle">{currentItineraryTitle}</h1>
+      <ItineraryList />
       <ReturnToMap />
     </div>
   );

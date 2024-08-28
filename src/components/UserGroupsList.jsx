@@ -2,9 +2,13 @@ import React, { useEffect, useState, useContext } from "react";
 import { UserContext } from "./UserContextProvider";
 import { getItineraryByGroupId, getUserGroups } from "../utils/axios";
 import { useNavigate } from "react-router-dom";
+import { GroupItineraryContext } from "./ItineraryContextProvider";
 
 export default function UserGroupsList() {
   const { userLoggedIn } = useContext(UserContext);
+  const { setCurrentItineraryId, setCurrentGroup, setCurrentItineraryTitle } =
+    useContext(GroupItineraryContext);
+
   const [isLoading, setIsLoading] = useState(true);
   const [isError, setIsError] = useState(false);
   const [userGroups, setUserGroups] = useState([]);
@@ -25,9 +29,12 @@ export default function UserGroupsList() {
       });
   }, []);
 
-  function handleEnterGroupItinerary(group_id) {
-    getItineraryByGroupId(group_id).then((itinerary) => {
-      navigate(`/itinerary_page/${itinerary.id}`);
+  function handleEnterGroupItinerary(group) {
+    getItineraryByGroupId(group.id).then((itinerary) => {
+      setCurrentGroup(group);
+      setCurrentItineraryTitle(itinerary.title);
+      setCurrentItineraryId(itinerary.id);
+      navigate(`/itinerary_page`);
     });
   }
 
@@ -41,7 +48,10 @@ export default function UserGroupsList() {
       <ul>
         {userGroups.map((group) => (
           <li key={group.id}>
-            <button onClick={() => handleEnterGroupItinerary(group.id)}>
+            <button
+              className="styled-button userGroupButton"
+              onClick={() => handleEnterGroupItinerary(group)}
+            >
               <p>{group.name}</p>
             </button>
           </li>

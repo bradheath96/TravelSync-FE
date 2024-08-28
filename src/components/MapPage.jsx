@@ -8,11 +8,12 @@ import Slider from "@mui/material/Slider";
 import { LocationContext } from "./LocationsContextProvider";
 import { useNavigate } from "react-router-dom";
 import HomeHeader from "./HomeHeader";
+import { GroupItineraryContext } from "./ItineraryContextProvider";
 
 export default function MapPage() {
   const [search, setSearch] = useState("");
   const navigate = useNavigate();
-
+  const { currentItineraryId } = useContext(GroupItineraryContext);
   const { locationsList, setLocationsList } = useContext(LocationContext);
   const [mainLocation, setMainLocation] = useState(
     locationsList ? locationsList[0] : null
@@ -23,7 +24,7 @@ export default function MapPage() {
   const [lng, setLng] = useState(-2.2426);
   const [lat, setLat] = useState(53.4808);
 
-  console.log(locationsList);
+  console.log(currentItineraryId);
 
   useEffect(() => {
     if (locationsList.length < 1 && navigator.geolocation) {
