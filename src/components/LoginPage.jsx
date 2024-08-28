@@ -24,8 +24,8 @@ export const LoginPage = () => {
       password: password,
     };
 
-    setUserLoggedIn(user.email);
-    localStorage.setItem("user", JSON.stringify(user.email));
+    setUserLoggedIn(user);
+    localStorage.setItem("user", JSON.stringify(user));
 
     return createUser(user);
   };
@@ -33,16 +33,16 @@ export const LoginPage = () => {
   const handleLogin = (formData) => {
     formData.preventDefault();
     const formElements = formData.target.elements;
-    const email = formElements.email.value;
+    const username = formElements.username.value;
     const password = formElements.password.value;
 
     const user = {
-      email: email,
+      username: username,
       password: password,
     };
 
-    setUserLoggedIn(user.email);
-    localStorage.setItem("user", JSON.stringify(user.email));
+    setUserLoggedIn(user);
+    localStorage.setItem("user", JSON.stringify(user));
 
     return getUser(user).then((data) => {
       console.log("Login successful:", data);
@@ -88,9 +88,9 @@ export const LoginPage = () => {
           <TextField
             sx={{ borderBottom: "1px black solid", margin: "5px" }}
             className="form-input"
-            id="email-input"
-            label="Email"
-            name="email"
+            id="username-input"
+            label="Username"
+            name="username"
             required
           />
           <TextField
