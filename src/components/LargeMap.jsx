@@ -50,7 +50,6 @@ export default function LargeMap({ locationsList, lat, lng }) {
         markerElement
           .querySelector(".popup-details-button")
           .addEventListener("click", () => {
-            console.log(location.place_id);
             navigate(`/location/${location.place_id}`);
           });
 
@@ -68,9 +67,7 @@ export default function LargeMap({ locationsList, lat, lng }) {
               coords: coords,
             };
             addLocationToItinerary(currentItineraryId, event).then(
-              (response) => {
-                console.log(response, "<<< Added to the itinerary");
-              }
+              (response) => {}
             );
           });
 

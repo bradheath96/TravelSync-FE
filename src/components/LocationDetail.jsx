@@ -9,8 +9,6 @@ const LocationDetail = () => {
   const [isError, setIsError] = useState(false);
   const navigate = useNavigate();
 
-  console.log(placeDetail)
-
   const { place_id } = useParams();
 
   useEffect(() => {

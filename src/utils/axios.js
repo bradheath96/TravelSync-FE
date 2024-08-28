@@ -22,7 +22,6 @@ export const getPlaceDetail = (place_id) => {
 };
 
 export const getNearbyLocations = (coords, radius, type) => {
-  console.log(type, "<<< axios");
   return travelSyncAPI
     .post(
       `/places/nearby?location=${coords.lat}%2C${coords.lng}&radius=${radius}&type=${type}`
@@ -33,9 +32,7 @@ export const getNearbyLocations = (coords, radius, type) => {
 };
 
 export const postGroups = (groupName) => {
-  console.log(groupName, "axios input");
   return travelSyncAPI.post(`/groups`, { groupName }).then((group) => {
-    console.log(group, "<<<axios");
     return group.data.groups;
   });
 };
@@ -47,28 +44,24 @@ export const joinGroups = (userId, joinCode) => {
       join_code: joinCode,
     })
     .then((response) => {
-      console.log(response.data);
       return response.data;
     });
 };
 
 export const createUser = (userObj) => {
   return travelSyncAPI.post(`/users/`, userObj).then((response) => {
-    console.log(response, "IN AXIOS");
     return response.data;
   });
 };
 
 export const getUser = (userObj) => {
   return travelSyncAPI.post(`/users/user`, userObj).then((response) => {
-    console.log(response);
+    return response.data;
   });
 };
 
 export const getUserGroups = (user_id) => {
-  console.log(user_id);
   return travelSyncAPI.get(`/users/${user_id}/groups`).then((groups) => {
-    console.log(groups);
     return groups.data;
   });
 };
@@ -81,7 +74,6 @@ export const getItineraryByGroupId = (group_id) => {
 
 export const getItineraryByItineraryID = (itinerary_id) => {
   return travelSyncAPI.get(`/itineraries/${itinerary_id}`).then(({ data }) => {
-    console.log(data);
     return data;
   });
 };
@@ -90,7 +82,6 @@ export const getItineraryEvents = (itinerary_id) => {
   return travelSyncAPI
     .get(`/itineraries/${itinerary_id}/events`)
     .then(({ data }) => {
-      console.log(data);
       return data;
     });
 };
@@ -100,7 +91,6 @@ export const updateItineraryOrder = (itinerary_id, itinerary_order) => {
   return travelSyncAPI
     .patch(`/itineraries/${itinerary_id}`, params)
     .then(({ data }) => {
-      console.log(data);
       return data;
     });
 };

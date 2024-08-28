@@ -24,7 +24,6 @@ export const LoginPage = () => {
       password: password,
     };
 
-    console.log(user);
     setUserLoggedIn(user.email);
     localStorage.setItem("user", JSON.stringify(user.email));
 
@@ -45,10 +44,9 @@ export const LoginPage = () => {
     setUserLoggedIn(user.email);
     localStorage.setItem("user", JSON.stringify(user.email));
 
-    // You can add logic here to check login credentials, e.g., an API call
-    console.log("Login successful:", user);
-
-    return getUser(user);
+    return getUser(user).then((data) => {
+      console.log("Login successful:", data);
+    });
   };
 
   return (

@@ -17,7 +17,6 @@ export default function UserGroupsList() {
   useEffect(() => {
     setIsLoading(true);
     setIsError(false);
-    console.log(userLoggedIn.id);
     getUserGroups(userLoggedIn.id)
       .then((groups) => {
         setIsLoading(false);
@@ -43,7 +42,6 @@ export default function UserGroupsList() {
     });
   }
 
-  console.log(userGroups);
   return isError ? (
     "error"
   ) : isLoading ? (

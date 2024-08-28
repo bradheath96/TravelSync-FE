@@ -53,7 +53,6 @@ function TypeMenu({ type, setType }) {
   const theme = useTheme();
 
   const handleChange = (event) => {
-    console.log(event.target.value, "<<< event");
     setType(event.target.value);
   };
 
