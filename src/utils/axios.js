@@ -47,9 +47,11 @@ export const joinGroups = (userId, joinCode) => {
       join_code: joinCode,
     })
     .then((response) => {
-      console.log(response.data);
       return response.data;
-    });
+    })
+    .catch((error) => {
+      return error
+    })
 };
 
 export const getUserGroups = (user_id) => {

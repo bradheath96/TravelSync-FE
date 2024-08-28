@@ -7,14 +7,16 @@ export default function JoinGroup({userLoggedIn}) {
 
   const [groupCodeInput, setGroupCodeInput] = useState("");
 
-  const [message, setMessage] = useState(false);
+  const [message, setMessage] = useState("");
+
+  const [error, setError] = useState(null)
 
   function handleClick() {
     setJoinGroupForm(!joinGroupForm);
   }
 
   function handleChange(event) {
-    setMessage(false)
+    setMessage("")
     setGroupCodeInput(event.target.value);
   }
 
@@ -26,9 +28,9 @@ export default function JoinGroup({userLoggedIn}) {
       setMessage("You've successfully joined the group!");
       setError(false)
     })
-    .catch(() => {
+    .catch((error) => {
       setGroupCodeInput("")
-      setMessage("Invalid Group Code");
+      setMessage("Invalid Group Code!");
       setError(true)
     })
   }
@@ -48,7 +50,8 @@ export default function JoinGroup({userLoggedIn}) {
             onChange={handleChange}
           />
           <button>Join</button>
-          {message && <p>{message}</p>}
+          {error === true && <p>{message}</p>}
+          {error === false && <p>{message}</p>}
         </form>
       )}
     </>
