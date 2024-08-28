@@ -2,7 +2,7 @@ import MapPage from "./components/MapPage";
 import "mapbox-gl/dist/mapbox-gl.css";
 import { Route, Router, Routes } from "react-router-dom";
 import LocationDetail from "./components/LocationDetail";
-import ItineraryPage from "./components/Itinerary_Page";
+import ItineraryPage from "./components/ItineraryPage";
 import { LocationsContextProvider } from "./components/LocationsContextProvider";
 import Homepage from "./components/Homepage";
 import { UserContextProvider } from "./components/UserContextProvider";
