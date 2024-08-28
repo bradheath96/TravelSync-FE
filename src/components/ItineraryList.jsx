@@ -8,6 +8,9 @@ import {
   updateItineraryOrder,
 } from "../utils/axios";
 
+import deleteBin from "../assets/deleteBin.png";
+import reshuffle from "../assets/reshuffle.png";
+
 const ItineraryList = () => {
   const [events, setEvents] = useState([]);
   const [eventOrder, setEventOrder] = useState([]);
@@ -65,6 +68,7 @@ const ItineraryList = () => {
               backgroundColor: "var(--quad-color)",
               padding: "15px",
               borderRadius: "8px",
+              maxWidth: "700px",
             }}
           >
             {eventOrder.map((eventId, index) => {
@@ -93,7 +97,17 @@ const ItineraryList = () => {
                         ...provided.draggableProps.style,
                       }}
                     >
-                      {event.name}
+                      <div className="itineraryEventContentContainer">
+                        <button>
+                          <img
+                            src={deleteBin}
+                            className="binImg"
+                            alt="delete button"
+                          />
+                        </button>
+                        {event.name}
+                        <img src={reshuffle} className="reshuffleImg" />
+                      </div>
                     </div>
                   )}
                 </Draggable>

@@ -8,8 +8,8 @@
 
 :root {
   /* --background-color: #faf9f5; */
-  --text-color: #5e6472;
-  --light-text-color: #faf9f5;
+  --text-color: #3f434c;
+  --light-text-color: black;
   --primary-color: #ffa69e;
   --secondary-color: #74beca;
   --tertiary-color: #c5ebc3;
@@ -38,7 +38,8 @@ body {
   box-sizing: border-box;
   background-color: var(--background-color);
   font-family: "Poppins", sans-serif;
-  font-weight: 200;
+  font-weight: 600;
+  font-size: larger;
   font-style: light;
   color: var(--text-color);
 }
@@ -52,7 +53,6 @@ body {
 .homeHeader {
   display: flex;
   flex-direction: row-reverse;
-  margin: 10px;
   justify-content: space-between;
   align-items: center;
   width: 100%;
