@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const travelSyncAPI = axios.create({
-  baseURL: "https://travelsync-api-production.up.railway.app/api/",
+  baseURL: "https://travelsync-api-production.up.railway.app/api",
 });
 
 export const getSingleLocation = (addressStr) => {
@@ -53,7 +53,14 @@ export const joinGroups = (userId, joinCode) => {
 };
 
 export const createUser = (userObj) => {
-  return travelSyncAPI.post(`/users`, userObj).then((response) => {
+  return travelSyncAPI.post(`/users/`, userObj).then((response) => {
+    console.log(response, "IN AXIOS");
+    return response.data;
+  });
+};
+
+export const getUser = (userObj) => {
+  return travelSyncAPI.post(`/users/user`, userObj).then((response) => {
     console.log(response);
   });
 };
@@ -67,7 +74,7 @@ export const getUserGroups = (user_id) => {
 };
 
 export const getItineraryByGroupId = (group_id) => {
-  return travelSyncAPI.get(`groups/${group_id}/itinerary`).then(({ data }) => {
+  return travelSyncAPI.get(`/groups/${group_id}/itinerary`).then(({ data }) => {
     return data;
   });
 };
