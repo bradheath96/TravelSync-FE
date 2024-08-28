@@ -29,38 +29,40 @@ const LocationDetail = () => {
   }, [place_id]);
 
   function handleReturnToSearch() {
-    navigate(`/`);
+    navigate(`/map`);
   }
 
   return isError ? (
-    "Error fetching place detail"
-  ) : isLoading ? (
-    "page loading"
-  ) : (
-    <div>
-      <h1>{placeDetail.name}</h1>
-      <h3>{placeDetail.type}</h3>
-      {placeDetail.editorial_summary && (
-        <p>{placeDetail.editorial_summary.overview}</p>
-      )}
-      {placeDetail.rating && <h3>Rating: {placeDetail.rating}</h3>}
-      {placeDetail.opening_hours && (
-        <ul>
-          <h4>Opening Times:</h4>
-          {placeDetail.opening_hours.weekday_text.map((day) => (
-            <li key={day}>{day}</li>
-          ))}
-        </ul>
-      )}
-      <SmallMap
-        location={{
-          name: placeDetail.name,
-          "co-ords": placeDetail.geometry.location,
-        }}
-      />
-      <button onClick={handleReturnToSearch}>return to search</button>
-    </div>
-  );
+		"Error fetching place detail"
+	) : isLoading ? (
+		"page loading"
+	) : (
+		<div className="location-detail-container">
+			<h1>{placeDetail.name}</h1>
+			<h3>{placeDetail.type}</h3>
+			{placeDetail.editorial_summary && (
+				<p>{placeDetail.editorial_summary.overview}</p>
+			)}
+			{placeDetail.rating && <h3>Rating: {placeDetail.rating}</h3>}
+			{placeDetail.opening_hours && (
+				<ul>
+					<h4>Opening Times:</h4>
+					{placeDetail.opening_hours.weekday_text.map((day) => (
+						<li key={day}>{day}</li>
+					))}
+				</ul>
+			)}
+			<SmallMap
+				location={{
+					name: placeDetail.name,
+					"co-ords": placeDetail.geometry.location,
+				}}
+			/>
+			<button className="return-button" onClick={handleReturnToSearch}>
+				Return
+			</button>
+		</div>
+	);
 };
 
 export default LocationDetail;

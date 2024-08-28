@@ -5,18 +5,21 @@
 @import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
 @import "./homepage.css";
 @import "./itinerary.css";
+@import "./locationdetails.css";
 
 :root {
-  /* --background-color: #faf9f5; */
-  --text-color: #5e6472;
-  --light-text-color: #faf9f5;
-  --primary-color: #ffa69e;
-  --secondary-color: #74beca;
-  --tertiary-color: #c5ebc3;
-  --mainpin-color: #c5ebc3;
-  --quad-color: #e4f6e3;
-  --background-color: #f0faef;
+  --text-color: #22223b;       /* Darkest color for the primary text */
+  --light-text-color: #ffffff; /* Keep as white for contrast */
+  --primary-color: #4a4e69;    /* Mid-tone color for primary elements */
+  --secondary-color: #9a8c98;  /* Light purple-grey for secondary elements */
+  --tertiary-color: #ef8354;   /* Soft pinkish tone for tertiary elements */
+  --mainpin-color: #f2e9e4;    /* Same as background for subtle highlights */
+  --quad-color: #4a4e69;       /* Repeated for consistency */
+  --background-color: #f2e9e4; /* Repeating the background color */
 }
+
+
+
 
 * {
   margin: 0;
