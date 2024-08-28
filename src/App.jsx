@@ -17,6 +17,7 @@ function App() {
           <Routes className="app-container">
             {/* Change this path later */}
             <Route path="/" element={<Homepage />} />
+            <Route path="/login" element={<LoginPage />} />
             <Route
               path="/map"
               element={<MapPage className="map-container" />}
