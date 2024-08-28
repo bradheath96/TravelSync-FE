@@ -7,5 +7,9 @@ export default function () {
   function handleHomeClick() {
     navigate("/");
   }
-  return <button onClick={handleHomeClick}>Home</button>;
+  return (
+    <button className="styled-button HomeHeader" onClick={handleHomeClick}>
+      Home
+    </button>
+  );
 }

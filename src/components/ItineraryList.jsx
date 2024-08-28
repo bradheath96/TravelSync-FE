@@ -5,22 +5,20 @@ import {
   getItineraryByItineraryID,
   getItineraryEvents,
   updateItineraryOrder,
-} from "../utils/axios"; // Adjust the import path as needed
+} from "../utils/axios";
 
 const ItineraryList = ({ itinerary_id }) => {
   const [events, setEvents] = useState([]);
   const [eventOrder, setEventOrder] = useState([]);
 
   useEffect(() => {
-    // Fetch itinerary details to get the order of events
     getItineraryByItineraryID(itinerary_id)
-      .then((data) => {
-        setEventOrder(data.itinerary_order);
-        // Fetch the detailed events data
+      .then(({ itinerary_order }) => {
+        setEventOrder(itinerary_order);
         return getItineraryEvents(itinerary_id);
       })
-      .then((eventData) => {
-        setEvents(eventData);
+      .then((eventList) => {
+        setEvents(eventList);
       })
       .catch((error) =>
         console.error("Error fetching itinerary details:", error)
@@ -30,9 +28,9 @@ const ItineraryList = ({ itinerary_id }) => {
   const onDragEnd = (result) => {
     const { destination, source } = result;
 
-    if (!destination) return; // Exit if dropped outside the list
+    if (!destination) return;
 
-    if (destination.index === source.index) return; // Exit if dropped in the same position
+    if (destination.index === source.index) return;
 
     // Reorder the eventOrder array based on the drag-and-drop result
     const newEventOrder = Array.from(eventOrder);
@@ -42,7 +40,7 @@ const ItineraryList = ({ itinerary_id }) => {
     // Update state with the new order
     setEventOrder(newEventOrder);
 
-    // Update the server with the new order
+    // update database
     updateItineraryOrder(itinerary_id, newEventOrder)
       .then((response) =>
         console.log("Itinerary order updated successfully:", response)
@@ -61,9 +59,9 @@ const ItineraryList = ({ itinerary_id }) => {
             ref={provided.innerRef}
             style={{
               margin: "8px",
-              "background-color": "var(--quad-color)",
+              backgroundColor: "var(--quad-color)",
               padding: "15px",
-              "border-radius": "8px",
+              borderRadius: "8px",
             }}
           >
             {eventOrder.map((eventId, index) => {
