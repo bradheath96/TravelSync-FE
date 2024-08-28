@@ -26,7 +26,7 @@ export default function JoinGroup() {
   }
 
   return (
-    <>
+    <div className="joinGroupContainer">
       <button onClick={handleClick} className="styled-button">
         Join Group
       </button>
@@ -43,6 +43,6 @@ export default function JoinGroup() {
           {successMessage && <p>You've joined the group successfully!</p>}
         </form>
       )}
-    </>
+    </div>
   );
 }
