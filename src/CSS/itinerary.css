@@ -1,2 +1,24 @@
-.IRXae {
+.itineraryTitle {
+  text-align: center;
+}
+
+.itineraryPage {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.returnToMap {
+  margin: 10px;
+  width: 50px;
+  height: 50px;
+  border: none;
+  background-color: #f0faef;
+}
+
+.returnToMap img {
+  width: 100%;
+  height: 100%;
 }
