@@ -13,22 +13,21 @@ function App() {
   return (
     <UserContextProvider>
       <LocationsContextProvider>
-        <div className="app-container">
-          <Routes className="app-container">
-            {/* Change this path later */}
-            <Route path="/" element={<Homepage />} />
-            <Route path="/login" element={<LoginPage />} />
-            <Route
-              path="/map"
-              element={<MapPage className="map-container" />}
-            />
-            <Route path="/location/:place_id" element={<LocationDetail />} />
-            <Route
-              path="/itinerary_page/:itinerary_id"
-              element={<ItineraryPage />}
-            />
-          </Routes>
-        </div>
+        <GroupItineraryContextProvider>
+          <div className="app-container">
+            <Routes className="app-container">
+              {/* Change this path later */}
+              <Route path="/" element={<Homepage />} />
+              <Route path="/login" element={<LoginPage />} />
+              <Route
+                path="/map"
+                element={<MapPage className="map-container" />}
+              />
+              <Route path="/location/:place_id" element={<LocationDetail />} />
+              <Route path="/itinerary_page" element={<ItineraryPage />} />
+            </Routes>
+          </div>
+        </GroupItineraryContextProvider>
       </LocationsContextProvider>
     </UserContextProvider>
   );

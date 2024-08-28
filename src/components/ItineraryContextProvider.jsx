@@ -5,7 +5,6 @@ export const GroupItineraryContext = createContext();
 export const GroupItineraryContextProvider = ({ children }) => {
   const [currentItineraryId, setCurrentItineraryId] = useState(null);
   const [currentItineraryTitle, setCurrentItineraryTitle] = useState(null);
-
   const [currentGroup, setCurrentGroup] = useState({});
 
   useEffect(() => {
