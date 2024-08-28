@@ -6,27 +6,29 @@ import ItineraryPage from "./components/ItineraryPage";
 import { LocationsContextProvider } from "./components/LocationsContextProvider";
 import Homepage from "./components/Homepage";
 import { UserContextProvider } from "./components/UserContextProvider";
+import { LoginPage } from "./components/LoginPage";
 import { GroupItineraryContextProvider } from "./components/ItineraryContextProvider";
 
 function App() {
   return (
     <UserContextProvider>
-      <GroupItineraryContextProvider>
-        <LocationsContextProvider>
-          <div className="app-container">
-            <Routes className="app-container">
-              {/* Change this path later */}
-              <Route path="/" element={<Homepage />} />
-              <Route
-                path="/map"
-                element={<MapPage className="map-container" />}
-              />
-              <Route path="/location/:place_id" element={<LocationDetail />} />
-              <Route path="/itinerary_page" element={<ItineraryPage />} />
-            </Routes>
-          </div>
-        </LocationsContextProvider>
-      </GroupItineraryContextProvider>
+      <LocationsContextProvider>
+        <div className="app-container">
+          <Routes className="app-container">
+            {/* Change this path later */}
+            <Route path="/" element={<Homepage />} />
+            <Route
+              path="/map"
+              element={<MapPage className="map-container" />}
+            />
+            <Route path="/location/:place_id" element={<LocationDetail />} />
+            <Route
+              path="/itinerary_page/:itinerary_id"
+              element={<ItineraryPage />}
+            />
+          </Routes>
+        </div>
+      </LocationsContextProvider>
     </UserContextProvider>
   );
 }
