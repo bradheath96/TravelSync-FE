@@ -49,7 +49,7 @@ export default function JoinGroup({userLoggedIn}) {
             name="GroupCode"
             onChange={handleChange}
           />
-          <button>Join</button>
+          <button className="styled-button">Join</button>
           {error === true && <p>{message}</p>}
           {error === false && <p>{message}</p>}
         </form>
