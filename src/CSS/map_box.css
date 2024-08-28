@@ -15,6 +15,9 @@
 
 .popup-container {
   padding: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
 }
 
 .popup-title {
@@ -47,4 +50,14 @@
 
 .mapboxgl-marker svg {
   fill: var(--primary-color);
+}
+
+.mapboxgl-popup-content {
+  padding: 0px;
+}
+
+.popup-button-container {
+  display: flex;
+  flex-direction: row;
+  gap: 0.5rem;
 }
