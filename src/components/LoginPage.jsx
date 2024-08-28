@@ -1,7 +1,7 @@
 import { TextField } from "@mui/material";
 import { UserContext } from "./UserContextProvider";
 import { useContext, useState } from "react";
-import { createUser } from "../utils/axios";
+import { createUser, getUser } from "../utils/axios";
 
 export const LoginPage = () => {
   const { setUserLoggedIn } = useContext(UserContext);
@@ -13,10 +13,10 @@ export const LoginPage = () => {
 
   const handleSignUp = (formData) => {
     formData.preventDefault();
-    console.log(formData);
-    const username = formData.target[0].value;
-    const email = formData.target[2].value;
-    const password = formData.target[4].value;
+    const formElements = formData.target.elements;
+    const username = formElements.username.value;
+    const email = formElements.email.value;
+    const password = formElements.password.value;
 
     const user = {
       username: username,
@@ -24,16 +24,31 @@ export const LoginPage = () => {
       password: password,
     };
 
-    setUserLoggedIn(user);
-    localStorage.setItem("user", JSON.stringify(user));
-    console.log(user, "IN FUNC");
+    console.log(user);
+    setUserLoggedIn(user.email);
+    localStorage.setItem("user", JSON.stringify(user.email));
 
     return createUser(user);
   };
 
   const handleLogin = (formData) => {
     formData.preventDefault();
-    console.log(formData);
+    const formElements = formData.target.elements;
+    const email = formElements.email.value;
+    const password = formElements.password.value;
+
+    const user = {
+      email: email,
+      password: password,
+    };
+
+    setUserLoggedIn(user.email);
+    localStorage.setItem("user", JSON.stringify(user.email));
+
+    // You can add logic here to check login credentials, e.g., an API call
+    console.log("Login successful:", user);
+
+    return getUser(user);
   };
 
   return (
@@ -45,6 +60,7 @@ export const LoginPage = () => {
             className="form-input"
             id="username-input"
             label="Username"
+            name="username"
             required
           />
           <TextField
@@ -52,6 +68,7 @@ export const LoginPage = () => {
             className="form-input"
             id="email-input"
             label="Email"
+            name="email"
             required
           />
           <TextField
@@ -60,10 +77,13 @@ export const LoginPage = () => {
             id="outlined-password-input"
             label="Password"
             type="password"
+            name="password"
             autoComplete="current-password"
             required
           />
-          <button className="user-submit-btn">Sign Up</button>
+          <button type="submit" className="user-submit-btn">
+            Sign Up
+          </button>
         </form>
       ) : (
         <form onSubmit={handleLogin} className="login-form">
@@ -72,6 +92,7 @@ export const LoginPage = () => {
             className="form-input"
             id="email-input"
             label="Email"
+            name="email"
             required
           />
           <TextField
@@ -80,10 +101,13 @@ export const LoginPage = () => {
             id="outlined-password-input"
             label="Password"
             type="password"
+            name="password"
             autoComplete="current-password"
             required
           />
-          <button className="user-submit-btn">Login</button>
+          <button type="submit" className="user-submit-btn">
+            Login
+          </button>
         </form>
       )}
 
@@ -93,7 +117,7 @@ export const LoginPage = () => {
         </button>
       ) : (
         <button className="switch-button" onClick={handleForm}>
-          Don' Have An Account? Click Here To Signup
+          Don't Have An Account? Click Here To Signup
         </button>
       )}
     </div>
