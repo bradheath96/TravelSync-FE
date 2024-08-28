@@ -52,6 +52,12 @@ export const joinGroups = (userId, joinCode) => {
     });
 };
 
+export const createUser = (userObj) => {
+  return travelSyncAPI.post(`/users`, userObj).then((response) => {
+    console.log(response);
+  });
+};
+
 export const getUserGroups = (user_id) => {
   console.log(user_id);
   return travelSyncAPI.get(`/users/${user_id}/groups`).then((groups) => {
