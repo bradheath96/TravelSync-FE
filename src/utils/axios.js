@@ -40,6 +40,18 @@ export const postGroups = (groupName) => {
   });
 };
 
+export const joinGroups = (userId, joinCode) => {
+  return travelSyncAPI
+    .post(`/group_members/join`, {
+      user_id: userId,
+      join_code: joinCode,
+    })
+    .then((response) => {
+      console.log(response.data);
+      return response.data;
+    });
+};
+
 export const getUserGroups = (user_id) => {
   console.log(user_id);
   return travelSyncAPI.get(`/users/${user_id}/groups`).then((groups) => {

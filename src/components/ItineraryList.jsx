@@ -100,6 +100,7 @@ const ItineraryList = ({ itinerary_id }) => {
           </div>
         )}
       </Droppable>
+
     </DragDropContext>
   );
 };
