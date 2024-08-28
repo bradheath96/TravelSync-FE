@@ -34,6 +34,11 @@ export default function UserGroupsList() {
       setCurrentGroup(group);
       setCurrentItineraryTitle(itinerary.title);
       setCurrentItineraryId(itinerary.id);
+
+      localStorage.setItem("currentItineraryId", itinerary.id);
+      localStorage.setItem("currentGroup", JSON.stringify(group));
+      localStorage.setItem("currentItineraryTitle", itinerary.title);
+
       navigate(`/itinerary_page`);
     });
   }

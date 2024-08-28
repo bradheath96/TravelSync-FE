@@ -8,6 +8,10 @@ export default function () {
   const { currentGroup } = useContext(GroupItineraryContext);
 
   function handleHomeClick() {
+    localStorage.setItem("currentItineraryId", null);
+    localStorage.setItem("currentGroup", null);
+    localStorage.setItem("currentItineraryTitle", null);
+
     navigate("/");
   }
   return (

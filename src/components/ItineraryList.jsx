@@ -14,7 +14,6 @@ const ItineraryList = () => {
   const { currentItineraryId } = useContext(GroupItineraryContext);
 
   useEffect(() => {
-    console.log(currentItineraryId);
     getItineraryByItineraryID(currentItineraryId)
       .then(({ itinerary_order }) => {
         setEventOrder(itinerary_order);
