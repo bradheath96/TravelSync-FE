@@ -40,11 +40,11 @@ export default function UserGroupsList() {
     <div>
       <ul>
         {userGroups.map((group) => (
-          <button onClick={() => handleEnterGroupItinerary(group.id)}>
-            <li key={group.id}>
+          <li key={group.id}>
+            <button onClick={() => handleEnterGroupItinerary(group.id)}>
               <p>{group.name}</p>
-            </li>
-          </button>
+            </button>
+          </li>
         ))}
       </ul>
     </div>

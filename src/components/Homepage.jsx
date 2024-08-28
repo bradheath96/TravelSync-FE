@@ -1,12 +1,15 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import CreateGroup from "./CreateGroup";
 import JoinGroup from "./JoinGroup";
 import UserGroupsList from "./UserGroupsList";
+import { UserContext } from "./UserContextProvider";
 
 function Homepage() {
+  const { userLoggedIn } = useContext(UserContext);
+
   return (
-    <>
-      <h1>Hello from homepage</h1>
+    <div className="homepage">
+      <h1>Hello {userLoggedIn.username}</h1>
       <div className="profileSection"></div>
       <div className="userGroupControls">
         <CreateGroup />
@@ -15,7 +18,7 @@ function Homepage() {
       <div className="userGroupList">
         <UserGroupsList />
       </div>
-    </>
+    </div>
   );
 }
 
