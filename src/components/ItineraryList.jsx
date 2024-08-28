@@ -20,6 +20,7 @@ const ItineraryList = () => {
         return getItineraryEvents(currentItineraryId);
       })
       .then((eventList) => {
+        console.log(eventList);
         setEvents(eventList);
       })
       .catch((error) =>

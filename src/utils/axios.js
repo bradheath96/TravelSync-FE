@@ -97,3 +97,10 @@ export const updateItineraryOrder = (itinerary_id, itinerary_order) => {
       return data;
     });
 };
+export const addLocationToItinerary = (itinerary_id, event) => {
+  return travelSyncAPI
+    .post(`/itineraries/${itinerary_id}/events`, event)
+    .then(({ data }) => {
+      return data;
+    });
+};
