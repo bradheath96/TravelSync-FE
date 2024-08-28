@@ -25,8 +25,10 @@ function CreateGroup() {
 
   return (
     <div>
-      <button onClick={handleOnClick}>Create Group</button>
-      {groupButton &&
+      <button onClick={handleOnClick} className="styled-button">
+        Create Group
+      </button>
+      {groupButton && (
         <form>
           <label htmlFor="GroupName">Group Name: </label>
           <input
@@ -38,7 +40,7 @@ function CreateGroup() {
           />
           <button onClick={handleSubmit}>Confirm</button>
         </form>
-      }
+      )}
     </div>
   );
 }

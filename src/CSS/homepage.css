@@ -3,11 +3,13 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  gap: 2rem;
 }
 
 .userGroupControls {
   display: flex;
   flex-direction: row;
   justify-content: center;
-  align-items: normal;
+  align-items: center;
+  gap: 3rem;
 }

@@ -3,12 +3,11 @@ import { useState, useEffect } from "react";
 import { joinGroups } from "../utils/axios";
 
 export default function JoinGroup() {
-
   const [joinGroupForm, setJoinGroupForm] = useState(false);
 
   const [groupCodeInput, setGroupCodeInput] = useState("");
 
-  const [successMessage, setSuccessMessage] = useState(false)
+  const [successMessage, setSuccessMessage] = useState(false);
 
   function handleClick() {
     setJoinGroupForm(!joinGroupForm);
@@ -18,18 +17,19 @@ export default function JoinGroup() {
     setGroupCodeInput(event.target.value);
   }
 
-  function handleSubmit(event){
+  function handleSubmit(event) {
     event.preventDefault();
-    setGroupCodeInput("")
+    setGroupCodeInput("");
     joinGroups(userId, joinCode).then((group) => {
-      setSuccessMessage(true)
-    })
-
+      setSuccessMessage(true);
+    });
   }
 
   return (
     <>
-      <button onClick={handleClick}>Join Group</button>
+      <button onClick={handleClick} className="styled-button">
+        Join Group
+      </button>
       {joinGroupForm && (
         <form>
           <label htmlFor="GroupCode">Group Code:</label>
@@ -40,10 +40,7 @@ export default function JoinGroup() {
             onChange={handleChange}
           />
           <button onSubmit={handleSubmit}>Join</button>
-          {successMessage && (
-            <p>You've joined the group successfully!</p>
-          )
-        }
+          {successMessage && <p>You've joined the group successfully!</p>}
         </form>
       )}
     </>
