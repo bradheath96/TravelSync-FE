@@ -16,12 +16,12 @@
 }
 
 .userGroupControls {
-  max-width: 800px; 
+  max-width: 800px;
   margin: 0 auto;
-  padding: 20px; 
-  background-color: var(--quad-color); 
-  border-radius: 10px; 
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
+  padding: 20px;
+  background-color: var(--quad-color);
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -48,16 +48,16 @@ li {
 
 .userGroupList {
   display: flex;
-  flex-direction: column; 
-  gap: 1.5rem; 
+  flex-direction: column;
+  gap: 1.5rem;
 }
 
 .joinGroupContainer {
   display: flex;
   flex-direction: column;
-  align-items: center; 
-  justify-content: center; 
-  gap: 1rem; 
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
   width: 100%;
   max-width: 400px;
   margin: 0 auto;
@@ -96,7 +96,6 @@ li {
   align-items: center;
 }
 
-
 .joinGroupContainer input[type="text"]:focus {
   outline: none;
   border-color: var(--primary-color);
@@ -106,8 +105,8 @@ li {
 .createGroupContainer {
   display: flex;
   flex-direction: column;
-  align-items: center; 
-  justify-content: center; 
+  align-items: center;
+  justify-content: center;
   gap: 1rem;
   width: 100%;
   max-width: 400px;
@@ -149,16 +148,15 @@ li {
   outline: none;
   border-color: var(--primary-color);
   box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
-  
 }
 
 .userGroupList {
-  max-width: 800px; 
+  max-width: 800px;
   margin: 0 auto;
-  padding: 20px; 
-  background-color: var(--quad-color); 
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
-  border-radius: 10px; 
+  padding: 20px;
+  background-color: var(--quad-color);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -170,31 +168,32 @@ li {
 .userGroupList ul {
   display: flex;
   flex-direction: column;
-  gap: 1.5rem; 
-  padding: 0; 
-  margin: 0; 
+  gap: 1.5rem;
+  padding: 0;
+  margin: 0;
 }
 
 .userGroupButton {
-  width: 100%; 
-  padding: 15px 20px; 
-  background-color: var(--secondary-color); 
+  width: 100%;
+  padding: 15px 20px;
+  background-color: var(--secondary-color);
   color: var(--text-color);
   border: none;
-  border-radius: 8px; 
-  font-size: 20px; 
+  border-radius: 8px;
+  font-size: 20px;
   font-weight: 700;
   text-align: center;
   cursor: pointer;
-  transition: background-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+  transition: background-color 0.2s ease, transform 0.2s ease,
+    box-shadow 0.2s ease;
 
   position: relative;
   overflow: hidden;
 }
 
 .userGroupButton:hover {
-  transform: translateY(-2px); 
-  box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2); 
+  transform: translateY(-2px);
+  box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);
 }
 
 .userGroupButton p {
@@ -203,6 +202,7 @@ li {
 }
 
 .logo {
-  width: 50%;
+  width: 90%;
+  margin-top: 30px;
   max-width: 450px;
 }
