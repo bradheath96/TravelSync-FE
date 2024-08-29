@@ -3,6 +3,7 @@ import MyDropzone from "./Dropzone";
 import deleteBin from "../assets/deleteBin.png";
 import documentIcon from "../assets/document.png";
 import { useNavigate } from "react-router-dom";
+import FlightTickets from "../assets/FlightTickets.pdf";
 
 export default function FilesPage() {
   const navigate = useNavigate();
@@ -24,7 +25,9 @@ export default function FilesPage() {
       <div className="filesListContainer">
         <ul>
           <li className="savedFile">
-            <img src={documentIcon} alt="pdf" className="documentIcon" />
+            <a href={FlightTickets} download>
+              <img src={documentIcon} alt="pdf" className="documentIcon" />
+            </a>
             <p>FlightTickets.pdf</p>
             <img src={deleteBin} className="binImg" alt="delete button" />
           </li>
