@@ -3,8 +3,12 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  gap: 3rem;
   height: 80%;
+  gap: 2rem;
+}
+
+.homepage h1 {
+  scale: 0.8;
 }
 
 .homepage-container {
