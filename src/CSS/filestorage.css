@@ -57,3 +57,8 @@
   width: 26px;
   cursor: pointer;
 }
+
+.fileReturnButton {
+  align-self: end;
+  margin-right: 20px;
+}

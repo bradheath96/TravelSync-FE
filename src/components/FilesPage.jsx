@@ -2,10 +2,22 @@ import React from "react";
 import MyDropzone from "./Dropzone";
 import deleteBin from "../assets/deleteBin.png";
 import documentIcon from "../assets/document.png";
+import { useNavigate } from "react-router-dom";
 
 export default function FilesPage() {
+  const navigate = useNavigate();
+  function handleGoToItineraryClick() {
+    navigate(`/itinerary_page`);
+  }
+
   return (
     <div className="filePage">
+      <button
+        className="return-button fileReturnButton"
+        onClick={handleGoToItineraryClick}
+      >
+        Return
+      </button>
       <h1>Holiday Files</h1>
       <MyDropzone />
       <h3>Your Group Files:</h3>
