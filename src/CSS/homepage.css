@@ -16,6 +16,7 @@
   height: 100%;
   display: flex;
   justify-content: center;
+  align-items: center;
 }
 
 .userGroupControls {
@@ -206,7 +207,6 @@ li {
 
 .logo {
   width: 90%;
-  margin-top: 30px;
   max-width: 450px;
 }
 
