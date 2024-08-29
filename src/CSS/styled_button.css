@@ -2,11 +2,10 @@
   width: auto;
   height: auto;
   padding: 10px;
-  margin-left: 10px;
   box-sizing: content-box;
 
   background-color: var(--primary-color);
-  color: white;
+  color: black;
   border: none;
   border-radius: 5px;
   font-size: 12px;
@@ -19,6 +18,8 @@
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
   position: relative;
   overflow: hidden;
+
+  white-space: nowrap;
 }
 
 .styled-button.hide {

@@ -24,7 +24,7 @@ function CreateGroup() {
 	};
 
 	return (
-		<div>
+		<div className="createGroupContainer">
 			<button onClick={handleOnClick} className="styled-button">
 				Create Group
 			</button>
@@ -38,7 +38,9 @@ function CreateGroup() {
 						onChange={handleChange}
 						value={currentInput}
 					/>
-					<button onClick={handleSubmit}>Confirm</button>
+					<button onClick={handleSubmit} className="styled-button">
+						Confirm
+					</button>
 				</form>
 			)}
 		</div>
