@@ -6,8 +6,9 @@
 @import "./homepage.css";
 @import "./itinerary.css";
 @import "./locationdetails.css";
+@import "./filestorage.css";
 
-:root  {
+:root {
   /* --background-color: #faf9f5; */
   --text-color: #3f434c;
   --light-text-color: black;
@@ -17,11 +18,7 @@
   --mainpin-color: #c5ebc3;
   --quad-color: #e4f6e3;
   --background-color: #f0faef;
-
 }
-
-
-
 
 * {
   margin: 0;

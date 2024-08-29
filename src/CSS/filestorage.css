@@ -1,0 +1,17 @@
+.file_input {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 200px;
+  height: 200px;
+  padding: 50px;
+  color: black;
+  border: 2px black dashed;
+  border-radius: 12px;
+}
+
+.filePage {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}

@@ -8,7 +8,7 @@ export default function MyDropzone() {
   const { getRootProps, getInputProps, isDragActive } = useDropzone({ onDrop });
 
   return (
-    <div {...getRootProps()}>
+    <div {...getRootProps()} className="file_input">
       <input {...getInputProps()} />
       {isDragActive ? (
         <p>Drop the files here ...</p>
