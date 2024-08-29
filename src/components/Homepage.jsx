@@ -29,7 +29,7 @@ function Homepage() {
           <JoinGroup userLoggedIn={userLoggedIn} />
         </div>
         <div className="userGroupList">
-          <h4>Itineraries:</h4>
+          <h4>Groups:</h4>
           <UserGroupsList />
         </div>
       </div>
