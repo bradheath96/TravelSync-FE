@@ -4,7 +4,7 @@ import { getItineraryByGroupId, getUserGroups } from "../utils/axios";
 import { useNavigate } from "react-router-dom";
 import { GroupItineraryContext } from "./ItineraryContextProvider";
 
-export default function UserGroupsList() {
+export default function UserGroupsList({ groupUpdates, setGroupUpdates }) {
   const { userLoggedIn } = useContext(UserContext);
   const { setCurrentItineraryId, setCurrentGroup, setCurrentItineraryTitle } =
     useContext(GroupItineraryContext);
@@ -26,7 +26,8 @@ export default function UserGroupsList() {
         console.log(err);
         setIsError(true);
       });
-  }, []);
+    setGroupUpdates(false);
+  }, [groupUpdates]);
 
   function handleEnterGroupItinerary(group) {
     getItineraryByGroupId(group.id).then((itinerary) => {
@@ -43,22 +44,23 @@ export default function UserGroupsList() {
   }
 
   return isError ? (
-		"error"
-	) : isLoading ? (
-		"groups loading..."
-	) : (
-		<div>
-			<ul>
-				{userGroups.map((group) => (
-					<li key={group.id}>
-						<button
-							className="styled-button userGroupButton"
-							onClick={() => handleEnterGroupItinerary(group)}>
-							<p>{group.name}</p>
-						</button>
-					</li>
-				))}
-			</ul>
-		</div>
-	);
+    "error"
+  ) : isLoading ? (
+    "groups loading..."
+  ) : (
+    <div>
+      <ul>
+        {userGroups.map((group) => (
+          <li key={group.id}>
+            <button
+              className="styled-button userGroupButton"
+              onClick={() => handleEnterGroupItinerary(group)}
+            >
+              <p>{group.name}</p>
+            </button>
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
 }

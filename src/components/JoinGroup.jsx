@@ -1,39 +1,40 @@
 import React from "react";
 import { useState } from "react";
-import { joinGroups } from "../utils/axios";
+import { joinGroup } from "../utils/axios";
 
-export default function JoinGroup({userLoggedIn}) {
+export default function JoinGroup({ userLoggedIn }) {
   const [joinGroupForm, setJoinGroupForm] = useState(false);
 
   const [groupCodeInput, setGroupCodeInput] = useState("");
 
   const [message, setMessage] = useState("");
 
-  const [error, setError] = useState(null)
+  const [error, setError] = useState(null);
 
   function handleClick() {
     setJoinGroupForm(!joinGroupForm);
   }
 
   function handleChange(event) {
-    setMessage("")
+    setMessage("");
     setGroupCodeInput(event.target.value);
   }
 
   function handleSubmit(event) {
     event.preventDefault();
-    joinGroups(userLoggedIn.id, groupCodeInput)
-    .then((response) => {
-        console.log("from then block")
+    joinGroup(userLoggedIn.id, groupCodeInput)
+      .then((response) => {
+        console.log("from then block");
+        setGroupUpdates(true);
         setMessage("You've successfully joined the group!");
-        setError(false)
-    })
-    .catch((response) => {
-      if (response.msg === "Request failed with status code 404"){
-        setMessage("Invalid Group Code!");
-        setError(true)
-      }
-    })
+        setError(false);
+      })
+      .catch((response) => {
+        if (response.msg === "Request failed with status code 404") {
+          setMessage("Invalid Group Code!");
+          setError(true);
+        }
+      });
   }
 
   return (

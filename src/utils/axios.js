@@ -31,13 +31,15 @@ export const getNearbyLocations = (coords, radius, type) => {
     });
 };
 
-export const postGroups = (groupName) => {
-  return travelSyncAPI.post(`/groups`, { groupName }).then((group) => {
-    return group.data.groups;
+export const createGroup = (groupName) => {
+  console.log(groupName);
+  const name = { name: groupName };
+  return travelSyncAPI.post(`/groups/`, name).then(({ data }) => {
+    return data;
   });
 };
 
-export const joinGroups = (userId, joinCode) => {
+export const joinGroup = (userId, joinCode) => {
   return travelSyncAPI
     .post(`/group_members/join`, {
       user_id: userId,
@@ -49,9 +51,9 @@ export const joinGroups = (userId, joinCode) => {
     .catch((error) => {
       return Promise.reject({
         status: 404,
-        msg: "Request failed with status code 404"
-      })
-    })
+        msg: "Request failed with status code 404",
+      });
+    });
 };
 
 export const createUser = (userObj) => {

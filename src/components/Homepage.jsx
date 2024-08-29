@@ -8,6 +8,7 @@ import { useNavigate } from "react-router-dom";
 
 function Homepage() {
   const { userLoggedIn } = useContext(UserContext);
+  const [groupUpdates, setGroupUpdates] = useState(false);
 
   const navigate = useNavigate();
 
@@ -25,12 +26,18 @@ function Homepage() {
         <h1>Hello {userLoggedIn.username}</h1>
         <div className="profileSection"></div>
         <div className="userGroupControls">
-          <CreateGroup />
-          <JoinGroup userLoggedIn={userLoggedIn} />
+          <CreateGroup setGroupUpdates={setGroupUpdates} />
+          <JoinGroup
+            userLoggedIn={userLoggedIn}
+            setGroupUpdates={setGroupUpdates}
+          />
         </div>
         <div className="userGroupList">
           <h4>Groups:</h4>
-          <UserGroupsList />
+          <UserGroupsList
+            groupUpdates={groupUpdates}
+            setGroupUpdates={setGroupUpdates}
+          />
         </div>
       </div>
     </div>
