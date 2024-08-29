@@ -3,6 +3,7 @@ import { UserContext } from "./UserContextProvider";
 import { useContext, useState } from "react";
 import { createUser, getUser } from "../utils/axios";
 import { useNavigate } from "react-router-dom";
+import logo from "../assets/TravelSync.png";
 
 export const LoginPage = () => {
   const { setUserLoggedIn } = useContext(UserContext);
@@ -58,73 +59,76 @@ export const LoginPage = () => {
 
   return (
     <div className="login">
-      {!haveAccount ? (
-        <form onSubmit={handleSignUp} className="sign-up-form">
-          <TextField
-            sx={{ borderBottom: "1px black solid", margin: "5px" }}
-            className="form-input"
-            id="username-input"
-            label="Username"
-            name="username"
-            required
-          />
-          <TextField
-            sx={{ borderBottom: "1px black solid", margin: "5px" }}
-            className="form-input"
-            id="email-input"
-            label="Email"
-            name="email"
-            required
-          />
-          <TextField
-            sx={{ borderBottom: "1px black solid", margin: "5px" }}
-            className="form-input"
-            id="outlined-password-input"
-            label="Password"
-            type="password"
-            name="password"
-            autoComplete="current-password"
-            required
-          />
-          <button type="submit" className="user-submit-btn">
-            Sign Up
-          </button>
-        </form>
-      ) : (
-        <form onSubmit={handleLogin} className="login-form">
-          <TextField
-            sx={{ borderBottom: "1px black solid", margin: "5px" }}
-            className="form-input"
-            id="username-input"
-            label="Username"
-            name="username"
-            required
-          />
-          <TextField
-            sx={{ borderBottom: "1px black solid", margin: "5px" }}
-            className="form-input"
-            id="outlined-password-input"
-            label="Password"
-            type="password"
-            name="password"
-            autoComplete="current-password"
-            required
-          />
-          <button type="submit" className="user-submit-btn">
-            Login
-          </button>
-        </form>
-      )}
+      <img src={logo} alt="our Logo" className="loginLogo" />
+      <div className="loginFormContainer">
+        {!haveAccount ? (
+          <form onSubmit={handleSignUp} className="sign-up-form">
+            <TextField
+              sx={{ borderBottom: "1px black solid", margin: "5px" }}
+              className="form-input"
+              id="username-input"
+              label="Username"
+              name="username"
+              required
+            />
+            <TextField
+              sx={{ borderBottom: "1px black solid", margin: "5px" }}
+              className="form-input"
+              id="email-input"
+              label="Email"
+              name="email"
+              required
+            />
+            <TextField
+              sx={{ borderBottom: "1px black solid", margin: "5px" }}
+              className="form-input"
+              id="outlined-password-input"
+              label="Password"
+              type="password"
+              name="password"
+              autoComplete="current-password"
+              required
+            />
+            <button type="submit" className="styled-button">
+              Sign Up
+            </button>
+          </form>
+        ) : (
+          <form onSubmit={handleLogin} className="login-form">
+            <TextField
+              sx={{ borderBottom: "1px black solid", margin: "5px" }}
+              className="form-input"
+              id="username-input"
+              label="Username"
+              name="username"
+              required
+            />
+            <TextField
+              sx={{ borderBottom: "1px black solid", margin: "5px" }}
+              className="form-input"
+              id="outlined-password-input"
+              label="Password"
+              type="password"
+              name="password"
+              autoComplete="current-password"
+              required
+            />
+            <button type="submit" className="styled-button">
+              Login
+            </button>
+          </form>
+        )}
 
-      {!haveAccount ? (
-        <button className="switch-button" onClick={handleForm}>
-          Already Have An Account? Click Here To Login
-        </button>
-      ) : (
-        <button className="switch-button" onClick={handleForm}>
-          Don't Have An Account? Click Here To Signup
-        </button>
-      )}
+        {!haveAccount ? (
+          <button className="switch-button" onClick={handleForm}>
+            Already Have An Account? Click Here To Login
+          </button>
+        ) : (
+          <button className="switch-button" onClick={handleForm}>
+            Don't Have An Account? Click Here To Signup
+          </button>
+        )}
+      </div>
     </div>
   );
 };
