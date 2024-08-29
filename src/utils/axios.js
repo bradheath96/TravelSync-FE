@@ -45,7 +45,10 @@ export const joinGroups = (userId, joinCode) => {
     })
     .then((response) => {
       return response.data;
-    });
+    })
+    .catch((error) => {
+      return error
+    })
 };
 
 export const createUser = (userObj) => {

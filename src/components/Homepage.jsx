@@ -14,7 +14,7 @@ function Homepage() {
         <div className="profileSection"></div>
         <div className="userGroupControls">
           <CreateGroup />
-          <JoinGroup />
+          <JoinGroup userLoggedIn={userLoggedIn}/>
         </div>
         <div className="userGroupList">
           <UserGroupsList />

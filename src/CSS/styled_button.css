@@ -2,6 +2,7 @@
   width: auto;
   height: auto;
   padding: 10px;
+  margin-left: 10px;
   box-sizing: content-box;
 
   background-color: var(--primary-color);

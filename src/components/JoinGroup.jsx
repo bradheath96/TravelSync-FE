@@ -1,28 +1,38 @@
 import React from "react";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { joinGroups } from "../utils/axios";
 
-export default function JoinGroup() {
+export default function JoinGroup({userLoggedIn}) {
   const [joinGroupForm, setJoinGroupForm] = useState(false);
 
   const [groupCodeInput, setGroupCodeInput] = useState("");
 
-  const [successMessage, setSuccessMessage] = useState(false);
+  const [message, setMessage] = useState("");
+
+  const [error, setError] = useState(null)
 
   function handleClick() {
     setJoinGroupForm(!joinGroupForm);
   }
 
   function handleChange(event) {
+    setMessage("")
     setGroupCodeInput(event.target.value);
   }
 
   function handleSubmit(event) {
     event.preventDefault();
-    setGroupCodeInput("");
-    joinGroups(userId, joinCode).then((group) => {
-      setSuccessMessage(true);
-    });
+    joinGroups(userLoggedIn.id, groupCodeInput)
+    .then((group) => {
+      setGroupCodeInput("")
+      setMessage("You've successfully joined the group!");
+      setError(false)
+    })
+    .catch((error) => {
+      setGroupCodeInput("")
+      setMessage("Invalid Group Code!");
+      setError(true)
+    })
   }
 
   return (
@@ -31,7 +41,7 @@ export default function JoinGroup() {
         Join Group
       </button>
       {joinGroupForm && (
-        <form>
+        <form onSubmit={handleSubmit}>
           <label htmlFor="GroupCode">Group Code:</label>
           <input
             type="text"
@@ -39,8 +49,9 @@ export default function JoinGroup() {
             name="GroupCode"
             onChange={handleChange}
           />
-          <button onSubmit={handleSubmit}>Join</button>
-          {successMessage && <p>You've joined the group successfully!</p>}
+          <button className="styled-button">Join</button>
+          {error === true && <p>{message}</p>}
+          {error === false && <p>{message}</p>}
         </form>
       )}
     </div>
