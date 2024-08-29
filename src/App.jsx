@@ -8,6 +8,7 @@ import Homepage from "./components/Homepage";
 import { UserContextProvider } from "./components/UserContextProvider";
 import { LoginPage } from "./components/LoginPage";
 import { GroupItineraryContextProvider } from "./components/ItineraryContextProvider";
+import FilesPage from "./components/FilesPage";
 
 function App() {
   return (
@@ -25,6 +26,7 @@ function App() {
               />
               <Route path="/location/:place_id" element={<LocationDetail />} />
               <Route path="/itinerary_page" element={<ItineraryPage />} />
+              <Route path="/files_page" element={<FilesPage />} />
             </Routes>
           </div>
         </GroupItineraryContextProvider>

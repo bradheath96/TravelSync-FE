@@ -8,6 +8,9 @@ import {
 	updateItineraryOrder,
 } from "../utils/axios";
 
+import deleteBin from "../assets/deleteBin.png";
+import reshuffle from "../assets/reshuffle.png";
+
 const ItineraryList = () => {
 	const [events, setEvents] = useState([]);
 	const [eventOrder, setEventOrder] = useState([]);
@@ -52,55 +55,70 @@ const ItineraryList = () => {
 			);
 	};
 
-	return (
-		<DragDropContext onDragEnd={onDragEnd}>
-			<Droppable droppableId="droppable">
-				{(provided) => (
-					<div
-						{...provided.droppableProps}
-						ref={provided.innerRef}
-						style={{
-							margin: "8px",
-							backgroundColor: "var(--quad-color)",
-							padding: "15px",
-							borderRadius: "8px",
-						}}>
-						{eventOrder.map((eventId, index) => {
-							const event = events.find((e) => e.id === eventId);
-							if (!event) return null;
+  return (
+    <DragDropContext onDragEnd={onDragEnd}>
+      <Droppable droppableId="droppable">
+        {(provided) => (
+          <div
+            {...provided.droppableProps}
+            ref={provided.innerRef}
+            style={{
+              margin: "8px",
+              backgroundColor: "var(--quad-color)",
+              padding: "15px",
+              borderRadius: "8px",
+              maxWidth: "700px",
+            }}
+          >
+            {eventOrder.map((eventId, index) => {
+              const event = events.find((e) => e.id === eventId);
+              if (!event) return null;
 
-							return (
-								<Draggable
-									key={event.id}
-									draggableId={String(event.id)}
-									index={index}>
-									{(provided) => (
-										<div
-											ref={provided.innerRef}
-											{...provided.draggableProps}
-											{...provided.dragHandleProps}
-											style={{
-												userSelect: "none",
-												padding: "14px",
-												marginBottom: "12px",
-												backgroundColor: "var(--tertiary-color)",
-												border: "none",
-												borderRadius: "6px",
-												boxShadow: "0 4px 6px rgba(0, 0, 0, 0.2)",
-												...provided.draggableProps.style,
-											}}>
-											{event.name}
-										</div>
-									)}
-								</Draggable>
-							);
-						})}
-						{provided.placeholder}
-					</div>
-				)}
-			</Droppable>
-		</DragDropContext>
-	);
+              return (
+                <Draggable
+                  key={event.id}
+                  draggableId={String(event.id)}
+                  index={index}
+                >
+                  {(provided) => (
+                    <div
+                      ref={provided.innerRef}
+                      {...provided.draggableProps}
+                      {...provided.dragHandleProps}
+                      style={{
+                        userSelect: "none",
+                        padding: "14px",
+                        marginBottom: "12px",
+                        backgroundColor: "var(--tertiary-color)",
+                        border: "none",
+                        borderRadius: "6px",
+                        boxShadow: "0 4px 6px rgba(0, 0, 0, 0.2)",
+                        ...provided.draggableProps.style,
+                      }}
+                    >
+                      <div className="itineraryEventContentContainer">
+                        <button>
+                          <img
+                            src={deleteBin}
+                            className="binImg"
+                            alt="delete button"
+                          />
+                        </button>
+                        {event.name}
+                        <img src={reshuffle} className="reshuffleImg" />
+                      </div>
+                    </div>
+                  )}
+                </Draggable>
+              );
+            })}
+            {provided.placeholder}
+          </div>
+        )}
+      </Droppable>
+    </DragDropContext>
+  );
+
 };
 
 export default ItineraryList;

@@ -7,15 +7,17 @@
 @import "./itinerary.css";
 @import "./locationdetails.css";
 
-:root {
-  --text-color: #22223b;       /* Darkest color for the primary text */
-  --light-text-color: #ffffff; /* Keep as white for contrast */
-  --primary-color: #4a4e69;    /* Mid-tone color for primary elements */
-  --secondary-color: #9a8c98;  /* Light purple-grey for secondary elements */
-  --tertiary-color: #ef8354;   /* Soft pinkish tone for tertiary elements */
-  --mainpin-color: #f2e9e4;    /* Same as background for subtle highlights */
-  --quad-color: #4a4e69;       /* Repeated for consistency */
-  --background-color: #f2e9e4; /* Repeating the background color */
+:root  {
+  /* --background-color: #faf9f5; */
+  --text-color: #3f434c;
+  --light-text-color: black;
+  --primary-color: #ffa69e;
+  --secondary-color: #74beca;
+  --tertiary-color: #c5ebc3;
+  --mainpin-color: #c5ebc3;
+  --quad-color: #e4f6e3;
+  --background-color: #f0faef;
+
 }
 
 
@@ -41,7 +43,8 @@ body {
   box-sizing: border-box;
   background-color: var(--background-color);
   font-family: "Poppins", sans-serif;
-  font-weight: 200;
+  font-weight: 600;
+  font-size: larger;
   font-style: light;
   color: var(--text-color);
 }
@@ -55,7 +58,6 @@ body {
 .homeHeader {
   display: flex;
   flex-direction: row-reverse;
-  margin: 10px;
   justify-content: space-between;
   align-items: center;
   width: 100%;
