@@ -43,23 +43,22 @@ export default function UserGroupsList() {
   }
 
   return isError ? (
-    "error"
-  ) : isLoading ? (
-    "groups loading..."
-  ) : (
-    <div>
-      <ul>
-        {userGroups.map((group) => (
-          <li key={group.id}>
-            <button
-              className="styled-button userGroupButton"
-              onClick={() => handleEnterGroupItinerary(group)}
-            >
-              <p>{group.name}</p>
-            </button>
-          </li>
-        ))}
-      </ul>
-    </div>
-  );
+		"error"
+	) : isLoading ? (
+		"groups loading..."
+	) : (
+		<div>
+			<ul>
+				{userGroups.map((group) => (
+					<li key={group.id}>
+						<button
+							className="styled-button userGroupButton"
+							onClick={() => handleEnterGroupItinerary(group)}>
+							<p>{group.name}</p>
+						</button>
+					</li>
+				))}
+			</ul>
+		</div>
+	);
 }

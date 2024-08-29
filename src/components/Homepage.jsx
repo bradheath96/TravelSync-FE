@@ -12,14 +12,14 @@ function Homepage() {
     <div className="homepage-container">
       <div className="homepage">
         <img className="logo" src={logo} alt="logo" />
-
         <h1>Hello {userLoggedIn.username}</h1>
         <div className="profileSection"></div>
         <div className="userGroupControls">
           <CreateGroup />
-          <JoinGroup />
+          <JoinGroup userLoggedIn={userLoggedIn} />
         </div>
         <div className="userGroupList">
+          <h4>Itineraries:</h4>
           <UserGroupsList />
         </div>
       </div>
