@@ -23,15 +23,16 @@ export default function JoinGroup({userLoggedIn}) {
   function handleSubmit(event) {
     event.preventDefault();
     joinGroups(userLoggedIn.id, groupCodeInput)
-    .then((group) => {
-      setGroupCodeInput("")
-      setMessage("You've successfully joined the group!");
-      setError(false)
+    .then((response) => {
+        console.log("from then block")
+        setMessage("You've successfully joined the group!");
+        setError(false)
     })
-    .catch((error) => {
-      setGroupCodeInput("")
-      setMessage("Invalid Group Code!");
-      setError(true)
+    .catch((response) => {
+      if (response.msg === "Request failed with status code 404"){
+        setMessage("Invalid Group Code!");
+        setError(true)
+      }
     })
   }
 
