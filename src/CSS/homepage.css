@@ -16,7 +16,6 @@
   height: 100%;
   display: flex;
   justify-content: center;
-  align-items: center;
 }
 
 .userGroupControls {
@@ -209,4 +208,10 @@ li {
   width: 90%;
   margin-top: 30px;
   max-width: 450px;
+}
+
+.sign-out {
+  align-self: flex-end;
+  margin: 10px;
+  min-height: 15px;
 }
