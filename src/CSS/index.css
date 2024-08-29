@@ -6,6 +6,7 @@
 @import "./homepage.css";
 @import "./itinerary.css";
 @import "./locationdetails.css";
+@import "./file_page.css";
 
 :root  {
   /* --background-color: #faf9f5; */
