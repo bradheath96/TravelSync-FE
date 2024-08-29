@@ -1,54 +1,59 @@
 // DraggableList.jsx
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
+import { GroupItineraryContext } from "./ItineraryContextProvider";
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 import {
-  getItineraryByItineraryID,
-  getItineraryEvents,
-  updateItineraryOrder,
+	getItineraryByItineraryID,
+	getItineraryEvents,
+	updateItineraryOrder,
 } from "../utils/axios";
 
-const ItineraryList = ({ itinerary_id }) => {
-  const [events, setEvents] = useState([]);
-  const [eventOrder, setEventOrder] = useState([]);
+import deleteBin from "../assets/deleteBin.png";
+import reshuffle from "../assets/reshuffle.png";
 
-  useEffect(() => {
-    getItineraryByItineraryID(itinerary_id)
-      .then(({ itinerary_order }) => {
-        setEventOrder(itinerary_order);
-        return getItineraryEvents(itinerary_id);
-      })
-      .then((eventList) => {
-        setEvents(eventList);
-      })
-      .catch((error) =>
-        console.error("Error fetching itinerary details:", error)
-      );
-  }, [itinerary_id]);
+const ItineraryList = () => {
+	const [events, setEvents] = useState([]);
+	const [eventOrder, setEventOrder] = useState([]);
+	const { currentItineraryId } = useContext(GroupItineraryContext);
 
-  const onDragEnd = (result) => {
-    const { destination, source } = result;
+	useEffect(() => {
+		getItineraryByItineraryID(currentItineraryId)
+			.then(({ itinerary_order }) => {
+				setEventOrder(itinerary_order);
+				return getItineraryEvents(currentItineraryId);
+			})
+			.then((eventList) => {
+				setEvents(eventList);
+			})
+			.catch((error) =>
+				console.error("Error fetching itinerary details:", error)
+			);
+	}, [currentItineraryId]);
 
-    if (!destination) return;
+	const onDragEnd = (result) => {
+		const { destination, source } = result;
 
-    if (destination.index === source.index) return;
+		if (!destination) return;
 
-    // Reorder the eventOrder array based on the drag-and-drop result
-    const newEventOrder = Array.from(eventOrder);
-    const [movedEventId] = newEventOrder.splice(source.index, 1);
-    newEventOrder.splice(destination.index, 0, movedEventId);
+		if (destination.index === source.index) return;
 
-    // Update state with the new order
-    setEventOrder(newEventOrder);
+		// Reorder the eventOrder array based on the drag-and-drop result
+		const newEventOrder = Array.from(eventOrder);
+		const [movedEventId] = newEventOrder.splice(source.index, 1);
+		newEventOrder.splice(destination.index, 0, movedEventId);
 
-    // update database
-    updateItineraryOrder(itinerary_id, newEventOrder)
-      .then((response) =>
-        console.log("Itinerary order updated successfully:", response)
-      )
-      .catch((error) =>
-        console.error("Error updating itinerary order:", error)
-      );
-  };
+		// Update state with the new order
+		setEventOrder(newEventOrder);
+
+		// update database
+		updateItineraryOrder(currentItineraryId, newEventOrder)
+			.then((response) =>
+				console.log("Itinerary order updated successfully:", response)
+			)
+			.catch((error) =>
+				console.error("Error updating itinerary order:", error)
+			);
+	};
 
   return (
     <DragDropContext onDragEnd={onDragEnd}>
@@ -62,6 +67,7 @@ const ItineraryList = ({ itinerary_id }) => {
               backgroundColor: "var(--quad-color)",
               padding: "15px",
               borderRadius: "8px",
+              maxWidth: "700px",
             }}
           >
             {eventOrder.map((eventId, index) => {
@@ -90,7 +96,17 @@ const ItineraryList = ({ itinerary_id }) => {
                         ...provided.draggableProps.style,
                       }}
                     >
-                      {event.name}
+                      <div className="itineraryEventContentContainer">
+                        <button>
+                          <img
+                            src={deleteBin}
+                            className="binImg"
+                            alt="delete button"
+                          />
+                        </button>
+                        {event.name}
+                        <img src={reshuffle} className="reshuffleImg" />
+                      </div>
                     </div>
                   )}
                 </Draggable>
@@ -100,9 +116,9 @@ const ItineraryList = ({ itinerary_id }) => {
           </div>
         )}
       </Droppable>
-
     </DragDropContext>
   );
+
 };
 
 export default ItineraryList;

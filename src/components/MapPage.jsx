@@ -8,11 +8,12 @@ import Slider from "@mui/material/Slider";
 import { LocationContext } from "./LocationsContextProvider";
 import { useNavigate } from "react-router-dom";
 import HomeHeader from "./HomeHeader";
+import { GroupItineraryContext } from "./ItineraryContextProvider";
 
 export default function MapPage() {
   const [search, setSearch] = useState("");
   const navigate = useNavigate();
-
+  const { currentItineraryId } = useContext(GroupItineraryContext);
   const { locationsList, setLocationsList } = useContext(LocationContext);
   const [mainLocation, setMainLocation] = useState(
     locationsList ? locationsList[0] : null
@@ -22,8 +23,6 @@ export default function MapPage() {
   const [showNearby, setShowNearby] = useState(false);
   const [lng, setLng] = useState(-2.2426);
   const [lat, setLat] = useState(53.4808);
-
-  console.log(locationsList);
 
   useEffect(() => {
     if (locationsList.length < 1 && navigator.geolocation) {
@@ -55,7 +54,6 @@ export default function MapPage() {
   const handleSliderChange = debounce((event, value) => {
     event.preventDefault();
     setRadius(value);
-    console.log(locationsList);
   }, 500);
 
   useEffect(() => {
@@ -63,7 +61,6 @@ export default function MapPage() {
       getNearbyLocations(mainLocation.geometry.location, radius, type).then(
         (nearbyLocations) => {
           setLocationsList([locationsList[0], ...nearbyLocations]);
-          console.log(locationsList);
         }
       );
     }

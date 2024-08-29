@@ -1,2 +1,75 @@
-.IRXae {
+.itineraryTitle {
+  text-align: center;
+}
+
+.itineraryPage {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  gap: 2rem;
+}
+
+.returnToMap {
+  margin: 10px;
+  width: 60px;
+  height: 60px;
+  background: none;
+  border: none;
+}
+.returnToMap p {
+  font-size: 14px;
+
+}
+
+.returnToMap img {
+  width: 100%;
+  height: 100%;
+}
+
+.itineraryEventContentContainer {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  text-align: center;
+}
+
+.reshuffleImg {
+  height: 20px;
+  width: 20px;
+}
+
+.binImg {
+  height: 26px;
+  width: 20px;
+  cursor: pointer;
+}
+
+.itineraryEventContentContainer button,
+.goToFilesButton {
+  background: none;
+  border: none;
+}
+
+.goToFilesButton img {
+  width: 50px;
+  height: auto;
+  margin: 10px;
+}
+
+.bottomNav {
+  display: flex;
+  width: 100%;
+  flex-direction: row;
+  justify-content: space-between;
+  align-content: center;
+}
+
+.bottomNav button {
+  cursor: pointer;
+  margin-bottom: 20px;
 }
