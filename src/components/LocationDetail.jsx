@@ -63,6 +63,7 @@ const LocationDetail = () => {
       </button>
     </div>
   );
+
 };
 
 export default LocationDetail;

@@ -24,8 +24,6 @@ export default function MapPage() {
   const [lng, setLng] = useState(-2.2426);
   const [lat, setLat] = useState(53.4808);
 
-  console.log(currentItineraryId);
-
   useEffect(() => {
     if (locationsList.length < 1 && navigator.geolocation) {
       navigator.geolocation.getCurrentPosition((position) => {
@@ -56,7 +54,6 @@ export default function MapPage() {
   const handleSliderChange = debounce((event, value) => {
     event.preventDefault();
     setRadius(value);
-    console.log(locationsList);
   }, 500);
 
   useEffect(() => {
@@ -64,7 +61,6 @@ export default function MapPage() {
       getNearbyLocations(mainLocation.geometry.location, radius, type).then(
         (nearbyLocations) => {
           setLocationsList([locationsList[0], ...nearbyLocations]);
-          console.log(locationsList);
         }
       );
     }

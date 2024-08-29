@@ -56,7 +56,6 @@ export default function LargeMap({ locationsList, lat, lng }) {
         markerElement
           .querySelector(".popup-details-button")
           .addEventListener("click", () => {
-            console.log(location.place_id);
             navigate(`/location/${location.place_id}`);
           });
 
@@ -79,6 +78,7 @@ export default function LargeMap({ locationsList, lat, lng }) {
               markerElement.querySelector("dotlottie-player").style.display =
                 "block";
             });
+
           });
 
         const markerColor = index === 0 ? "#77d072" : "#ffa69e";

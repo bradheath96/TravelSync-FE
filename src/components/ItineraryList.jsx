@@ -3,58 +3,57 @@ import React, { useState, useEffect, useContext } from "react";
 import { GroupItineraryContext } from "./ItineraryContextProvider";
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 import {
-  getItineraryByItineraryID,
-  getItineraryEvents,
-  updateItineraryOrder,
+	getItineraryByItineraryID,
+	getItineraryEvents,
+	updateItineraryOrder,
 } from "../utils/axios";
 
 import deleteBin from "../assets/deleteBin.png";
 import reshuffle from "../assets/reshuffle.png";
 
 const ItineraryList = () => {
-  const [events, setEvents] = useState([]);
-  const [eventOrder, setEventOrder] = useState([]);
-  const { currentItineraryId } = useContext(GroupItineraryContext);
+	const [events, setEvents] = useState([]);
+	const [eventOrder, setEventOrder] = useState([]);
+	const { currentItineraryId } = useContext(GroupItineraryContext);
 
-  useEffect(() => {
-    getItineraryByItineraryID(currentItineraryId)
-      .then(({ itinerary_order }) => {
-        setEventOrder(itinerary_order);
-        return getItineraryEvents(currentItineraryId);
-      })
-      .then((eventList) => {
-        console.log(eventList);
-        setEvents(eventList);
-      })
-      .catch((error) =>
-        console.error("Error fetching itinerary details:", error)
-      );
-  }, [currentItineraryId]);
+	useEffect(() => {
+		getItineraryByItineraryID(currentItineraryId)
+			.then(({ itinerary_order }) => {
+				setEventOrder(itinerary_order);
+				return getItineraryEvents(currentItineraryId);
+			})
+			.then((eventList) => {
+				setEvents(eventList);
+			})
+			.catch((error) =>
+				console.error("Error fetching itinerary details:", error)
+			);
+	}, [currentItineraryId]);
 
-  const onDragEnd = (result) => {
-    const { destination, source } = result;
+	const onDragEnd = (result) => {
+		const { destination, source } = result;
 
-    if (!destination) return;
+		if (!destination) return;
 
-    if (destination.index === source.index) return;
+		if (destination.index === source.index) return;
 
-    // Reorder the eventOrder array based on the drag-and-drop result
-    const newEventOrder = Array.from(eventOrder);
-    const [movedEventId] = newEventOrder.splice(source.index, 1);
-    newEventOrder.splice(destination.index, 0, movedEventId);
+		// Reorder the eventOrder array based on the drag-and-drop result
+		const newEventOrder = Array.from(eventOrder);
+		const [movedEventId] = newEventOrder.splice(source.index, 1);
+		newEventOrder.splice(destination.index, 0, movedEventId);
 
-    // Update state with the new order
-    setEventOrder(newEventOrder);
+		// Update state with the new order
+		setEventOrder(newEventOrder);
 
-    // update database
-    updateItineraryOrder(currentItineraryId, newEventOrder)
-      .then((response) =>
-        console.log("Itinerary order updated successfully:", response)
-      )
-      .catch((error) =>
-        console.error("Error updating itinerary order:", error)
-      );
-  };
+		// update database
+		updateItineraryOrder(currentItineraryId, newEventOrder)
+			.then((response) =>
+				console.log("Itinerary order updated successfully:", response)
+			)
+			.catch((error) =>
+				console.error("Error updating itinerary order:", error)
+			);
+	};
 
   return (
     <DragDropContext onDragEnd={onDragEnd}>
@@ -119,6 +118,7 @@ const ItineraryList = () => {
       </Droppable>
     </DragDropContext>
   );
+
 };
 
 export default ItineraryList;

@@ -5,11 +5,11 @@
   box-sizing: content-box;
 
   background-color: var(--primary-color);
-  color: var(--light-text-color);
+  color: white;
   border: none;
   border-radius: 5px;
   font-size: 12px;
-  font-weight: bold;
+  font-weight: 700;
   text-align: center;
 
   cursor: pointer;
