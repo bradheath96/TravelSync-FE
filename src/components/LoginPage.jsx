@@ -2,10 +2,13 @@ import { TextField } from "@mui/material";
 import { UserContext } from "./UserContextProvider";
 import { useContext, useState } from "react";
 import { createUser, getUser } from "../utils/axios";
+import { useNavigate } from "react-router-dom";
 
 export const LoginPage = () => {
   const { setUserLoggedIn } = useContext(UserContext);
   const [haveAccount, setHaveAccount] = useState(false);
+
+  const navigate = useNavigate();
 
   const handleForm = () => {
     setHaveAccount((prevState) => !prevState);
@@ -27,7 +30,10 @@ export const LoginPage = () => {
     setUserLoggedIn(user);
     localStorage.setItem("user", JSON.stringify(user));
 
-    return createUser(user);
+    return createUser(user).then((data) => {
+      console.log("Login successful:", data);
+      navigate("/");
+    });
   };
 
   const handleLogin = (formData) => {
@@ -46,6 +52,7 @@ export const LoginPage = () => {
 
     return getUser(user).then((data) => {
       console.log("Login successful:", data);
+      navigate("/");
     });
   };
 
