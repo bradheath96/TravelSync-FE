@@ -6,6 +6,8 @@ export default function FilesPage() {
     <div className="filePage">
       <h1>Holiday Files</h1>
       <MyDropzone />
+      <h3>Your Group Files:</h3>
+      <div className="filesListContainer"></div>
     </div>
   );
 }
