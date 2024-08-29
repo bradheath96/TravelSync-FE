@@ -45,6 +45,7 @@
 .binImg {
   height: 26px;
   width: 20px;
+  cursor: pointer;
 }
 
 .itineraryEventContentContainer button,

@@ -9,8 +9,6 @@ const LocationDetail = () => {
   const [isError, setIsError] = useState(false);
   const navigate = useNavigate();
 
-  console.log(placeDetail)
-
   const { place_id } = useParams();
 
   useEffect(() => {
@@ -31,7 +29,7 @@ const LocationDetail = () => {
   }, [place_id]);
 
   function handleReturnToSearch() {
-    navigate(`/`);
+    navigate(`/map`);
   }
 
   return isError ? (
@@ -39,7 +37,7 @@ const LocationDetail = () => {
   ) : isLoading ? (
     "page loading"
   ) : (
-    <div>
+    <div className="location-detail-container">
       <h1>{placeDetail.name}</h1>
       <h3>{placeDetail.type}</h3>
       {placeDetail.editorial_summary && (
@@ -60,7 +58,9 @@ const LocationDetail = () => {
           "co-ords": placeDetail.geometry.location,
         }}
       />
-      <button onClick={handleReturnToSearch}>return to search</button>
+      <button className="return-button" onClick={handleReturnToSearch}>
+        Return
+      </button>
     </div>
   );
 };
