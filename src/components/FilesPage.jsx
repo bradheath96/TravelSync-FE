@@ -10,7 +10,7 @@ export default function FilesPage() {
   function handleGoToItineraryClick() {
     navigate(`/itinerary_page`);
   }
-
+  //  a download pdf option
   return (
     <div className="filePage">
       <button
