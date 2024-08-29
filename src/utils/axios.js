@@ -47,8 +47,8 @@ export const joinGroups = (userId, joinCode) => {
       return response.data;
     })
     .catch((error) => {
-      return error
-    })
+      return error;
+    });
 };
 
 export const createUser = (userObj) => {
@@ -102,5 +102,18 @@ export const addLocationToItinerary = (itinerary_id, event) => {
     .post(`/itineraries/${itinerary_id}/events`, event)
     .then(({ data }) => {
       return data;
+    });
+};
+
+export const uploadFile = (itinerary_id, formData) => {
+  const headers = {
+    headers: {
+      "Content-Type": "multipart/form-data",
+    },
+  };
+  return travelSyncAPI
+    .post(`/itineraries/${itinerary_id}/files`, formData, headers)
+    .then((response) => {
+      console.log(response);
     });
 };
