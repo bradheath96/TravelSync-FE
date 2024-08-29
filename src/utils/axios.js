@@ -47,7 +47,10 @@ export const joinGroups = (userId, joinCode) => {
       return response.data;
     })
     .catch((error) => {
-      return error
+      return Promise.reject({
+        status: 404,
+        msg: "Request failed with status code 404"
+      })
     })
 };
 
