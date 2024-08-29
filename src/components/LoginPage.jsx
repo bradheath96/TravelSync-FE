@@ -27,11 +27,11 @@ export const LoginPage = () => {
       password: password,
     };
 
-    setUserLoggedIn(user);
     localStorage.setItem("user", JSON.stringify(user));
 
     return createUser(user).then((data) => {
       console.log("Login successful:", data);
+      setUserLoggedIn(data);
       navigate("/");
     });
   };

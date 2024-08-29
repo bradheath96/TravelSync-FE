@@ -45,7 +45,13 @@ export const joinGroups = (userId, joinCode) => {
     })
     .then((response) => {
       return response.data;
-    });
+    })
+    .catch((error) => {
+      return Promise.reject({
+        status: 404,
+        msg: "Request failed with status code 404"
+      })
+    })
 };
 
 export const createUser = (userObj) => {
@@ -99,5 +105,13 @@ export const addLocationToItinerary = (itinerary_id, event) => {
     .post(`/itineraries/${itinerary_id}/events`, event)
     .then(({ data }) => {
       return data;
+    });
+};
+
+export const deleteEventById = (event_id) => {
+  return travelSyncAPI
+    .delete(`/itinerary-events/${event_id}`)
+    .then((response) => {
+      return response;
     });
 };
