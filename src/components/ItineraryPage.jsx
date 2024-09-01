@@ -10,7 +10,7 @@ export default function Itinerary_Page() {
   const { currentItinerary } = useContext(ItineraryContext);
 
   return (
-    <div className="allItineraryPagesContainer">
+    <div className="itineraryPageContainer">
       <TopNav />
       <div className="itineraryPage">
         <HomeHeader />

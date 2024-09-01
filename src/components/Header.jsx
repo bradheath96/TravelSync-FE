@@ -6,7 +6,7 @@ export default function () {
   const { currentItinerary } = useContext(ItineraryContext);
 
   return (
-    <div className="homeHeader">
+    <div className="joinHeader">
       <p>Join Code: {currentItinerary.join_code}</p>
     </div>
   );

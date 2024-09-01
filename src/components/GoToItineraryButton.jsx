@@ -8,10 +8,11 @@ export default function GoToItineraryButton() {
   }
   return (
     <button
-      className="goToItineraryButton bottomNavButton"
+      className="goToItineraryButton bottomNavButton topNavButton"
       onClick={handleGoToItineraryPageClick}
     >
       <img src={itineraryImage} alt="go to itinerary button" />
+      <p className="topNavText">Itinerary</p>
     </button>
   );
 }

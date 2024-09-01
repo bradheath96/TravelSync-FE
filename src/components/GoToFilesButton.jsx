@@ -11,10 +11,11 @@ export default function GoToFilesButton() {
 
   return (
     <button
-      className="goToFilesButton bottomNavButton"
+      className="goToFilesButton bottomNavButton topNavButton"
       onClick={handleFilesPageClick}
     >
       <img src={fileImage} alt="go to files button" />
+      <p className="topNavText">Files</p>
     </button>
   );
 }

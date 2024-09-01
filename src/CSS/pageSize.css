@@ -1,10 +1,42 @@
-/* @media only screen and (min-width: 500px) and {
+@media only screen and (min-width: 500px) {
   .bottomNav {
-    display: none;
+    display: none !important;
   }
   .topNav {
-    display: flex;
+    display: flex !important;
     flex-direction: row;
     width: 100%;
+    margin-top: 30px;
+    margin-bottom: 40px;
+    justify-content: space-evenly;
   }
-} */
+  .mapPage,
+  .filePage,
+  .itineraryPage {
+    padding-bottom: 0px;
+  }
+  .topNav button {
+    background-color: var(--secondary-color);
+    width: 15%;
+    padding: 10px;
+    border-radius: 12px;
+    max-width: 90px;
+  }
+}
+
+@media only screen and (min-width: 1200px) {
+  .topNavText {
+    font-size: large;
+    display: block !important;
+  }
+
+  .topNav button {
+    width: 15%;
+    max-width: 200px;
+    padding: 12px;
+    flex-direction: row;
+  }
+  .topNav button img {
+    max-width: 40px;
+  }
+}

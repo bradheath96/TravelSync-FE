@@ -12,8 +12,9 @@ export default function HomeButton() {
     navigate("/");
   }
   return (
-    <button className="bottomNavButton" onClick={handleHomeClick}>
+    <button className="bottomNavButton topNavButton" onClick={handleHomeClick}>
       <img src={homeIcon} alt="" />
+      <p className="topNavText">Home</p>
     </button>
   );
 }
