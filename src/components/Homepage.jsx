@@ -1,16 +1,23 @@
-import { useState, useContext } from "react";
-import CreateGroup from "./CreateGroup";
-import JoinGroup from "./JoinGroup";
-import UserGroupsList from "./UserGroupsList";
+import { useState, useContext, useEffect } from "react";
+import CreateItinerary from "./CreateItinerary";
+import JoinItinerary from "./JoinItinerary";
+import UserItinerariesList from "./UserItinerariesList";
 import { UserContext } from "./UserContextProvider";
 import logo from "../assets/TravelSync.png";
 import { useNavigate } from "react-router-dom";
+import { ItineraryContext } from "./ItineraryContextProvider";
 
-function Homepage() {
+export default function Homepage() {
   const { userLoggedIn } = useContext(UserContext);
-  const [groupUpdates, setGroupUpdates] = useState(false);
+  const { setCurrentItinerary } = useContext(ItineraryContext);
+
+  const [itineraryUpdates, setItineraryUpdates] = useState(false);
 
   const navigate = useNavigate();
+
+  useEffect(() => {
+    setCurrentItinerary(null);
+  }, []);
 
   const handleOnClick = () => {
     navigate("/login");
@@ -25,23 +32,21 @@ function Homepage() {
         <img className="logo" src={logo} alt="logo" />
         <h1>Hello {userLoggedIn.username}</h1>
         <div className="profileSection"></div>
-        <div className="userGroupControls">
-          <CreateGroup setGroupUpdates={setGroupUpdates} />
-          <JoinGroup
+        <div className="userItineraryControls">
+          <CreateItinerary setItineraryUpdates={setItineraryUpdates} />
+          <JoinItinerary
             userLoggedIn={userLoggedIn}
-            setGroupUpdates={setGroupUpdates}
+            setItineraryUpdates={setItineraryUpdates}
           />
         </div>
-        <div className="userGroupList">
-          <h4>Groups:</h4>
-          <UserGroupsList
-            groupUpdates={groupUpdates}
-            setGroupUpdates={setGroupUpdates}
+        <div className="userItineraryList">
+          <h4>Itineraries:</h4>
+          <UserItinerariesList
+            itineraryUpdates={itineraryUpdates}
+            setItineraryUpdates={setItineraryUpdates}
           />
         </div>
       </div>
     </div>
   );
 }
-
-export default Homepage;

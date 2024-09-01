@@ -1,29 +1,23 @@
 import React from "react";
 import ItineraryList from "./ItineraryList";
-import HomeHeader from "./HomeHeader";
-import ReturnToMap from "./ReturnToMap";
+import HomeHeader from "./Header";
 import { useContext } from "react";
-import { GroupItineraryContext } from "./ItineraryContextProvider";
-import fileImage from "../assets/files.png";
-import { useNavigate } from "react-router-dom";
+import { ItineraryContext } from "./ItineraryContextProvider";
+import BottomNav from "./BottomNav";
+import TopNav from "./topNav";
 
 export default function Itinerary_Page() {
-  const { currentItineraryTitle } = useContext(GroupItineraryContext);
-  const navigate = useNavigate();
-  function handleFilesPageClick() {
-    navigate("/files_page");
-  }
+  const { currentItinerary } = useContext(ItineraryContext);
+
   return (
-    <div className="itineraryPage">
-      <HomeHeader />
-      <h1 className="itineraryTitle">{currentItineraryTitle}</h1>
-      <ItineraryList />
-      <div className="bottomNav">
-        <ReturnToMap />
-        <button className="goToFilesButton" onClick={handleFilesPageClick}>
-          <img src={fileImage} alt="go to files button" />
-        </button>
+    <div className="allItineraryPagesContainer">
+      <TopNav />
+      <div className="itineraryPage">
+        <HomeHeader />
+        <h1 className="itineraryTitle">{currentItinerary.name}</h1>
+        <ItineraryList />
       </div>
+      <BottomNav />
     </div>
   );
 }

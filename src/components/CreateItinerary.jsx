@@ -1,15 +1,14 @@
-import { useState } from "react";
-import { createGroup, joinGroup } from "../utils/axios";
-import { useContext } from "react";
+import { useState, useContext } from "react";
+import { createItinerary, joinItinerary } from "../axios/index";
 import { UserContext } from "./UserContextProvider";
 
-function CreateGroup({ setGroupUpdates }) {
+export default function CreateItinerary({ setItineraryUpdates }) {
   const [currentInput, setCurrentInput] = useState("");
-  const [groupButton, setGroupButton] = useState(false);
+  const [itineraryButton, setItineraryButton] = useState(false);
   const { userLoggedIn } = useContext(UserContext);
 
-  const handleOnClick = (event) => {
-    setGroupButton(!groupButton);
+  const handleOnClick = () => {
+    setItineraryButton(!itineraryButton);
   };
 
   const handleChange = (event) => {
@@ -18,28 +17,27 @@ function CreateGroup({ setGroupUpdates }) {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    createGroup(currentInput).then((group) => {
-      joinGroup(userLoggedIn.id, group.join_code).then((response) => {
-        console.log(response);
-        setGroupUpdates(true);
+    createItinerary(currentInput).then((itinerary) => {
+      joinItinerary(userLoggedIn.id, itinerary.join_code).then((response) => {
+        setItineraryUpdates(true);
       });
     });
     setCurrentInput("");
-    setGroupButton(false);
+    setItineraryButton(false);
   };
 
   return (
-    <div className="createGroupContainer">
+    <div>
       <button onClick={handleOnClick} className="styled-button">
-        Create Group
+        Create Itinerary
       </button>
-      {groupButton && (
+      {itineraryButton && (
         <form>
-          <label htmlFor="GroupName">Group Name: </label>
+          <label htmlFor="ItineraryName">Itinerary Name: </label>
           <input
             type="text"
-            id="GroupName"
-            name="GroupName"
+            id="ItineraryName"
+            name="ItineraryName"
             onChange={handleChange}
             value={currentInput}
           />
@@ -51,5 +49,3 @@ function CreateGroup({ setGroupUpdates }) {
     </div>
   );
 }
-
-export default CreateGroup;

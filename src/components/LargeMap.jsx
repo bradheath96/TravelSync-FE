@@ -2,12 +2,10 @@ import React, { useRef, useEffect, useState, useContext } from "react";
 import mapboxgl from "mapbox-gl";
 import mapBoxAccessCode from "../utils/map_box_access_key";
 import "../CSS/map_box.css";
-import { ContentCopySharp } from "@mui/icons-material";
 import { useNavigate } from "react-router-dom";
-import { GroupItineraryContext } from "./ItineraryContextProvider";
-import { addLocationToItinerary } from "../utils/axios";
+import { ItineraryContext } from "./ItineraryContextProvider";
+import { addLocationToItinerary } from "../axios/index";
 mapboxgl.accessToken = mapBoxAccessCode;
-import aninmationData from "../assets/tick-lottie.json";
 
 export default function LargeMap({ locationsList, lat, lng }) {
   const mapContainer = useRef(null);
@@ -15,7 +13,7 @@ export default function LargeMap({ locationsList, lat, lng }) {
   const markers = useRef([]);
 
   const navigate = useNavigate();
-  const { currentItineraryId } = useContext(GroupItineraryContext);
+  const { currentItinerary } = useContext(ItineraryContext);
   useEffect(() => {
     map.current = new mapboxgl.Map({
       container: mapContainer.current,
@@ -72,13 +70,12 @@ export default function LargeMap({ locationsList, lat, lng }) {
               place_id: location.place_id,
               coords: coords,
             };
-            addLocationToItinerary(currentItineraryId, event).then(() => {
+            addLocationToItinerary(currentItinerary.id, event).then(() => {
               markerElement.querySelector(".popup-add-button").style.display =
                 "none";
               markerElement.querySelector("dotlottie-player").style.display =
                 "block";
             });
-
           });
 
         const markerColor = index === 0 ? "#77d072" : "#ffa69e";
@@ -119,7 +116,7 @@ export default function LargeMap({ locationsList, lat, lng }) {
   return (
     <div
       ref={mapContainer}
-      style={{ width: "100%", height: "500px" }}
+      style={{ width: "100%", height: "70%" }}
       className="map-container"
     />
   );

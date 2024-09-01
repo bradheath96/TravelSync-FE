@@ -1,0 +1,10 @@
+/* @media only screen and (min-width: 500px) and {
+  .bottomNav {
+    display: none;
+  }
+  .topNav {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+  }
+} */

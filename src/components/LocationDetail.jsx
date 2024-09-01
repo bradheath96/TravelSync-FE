@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import SmallMap from "./SmallMap";
 import { useParams, useNavigate } from "react-router-dom";
-import { getPlaceDetail } from "../utils/axios";
+import { getPlaceDetail } from "../axios/index";
 
 const LocationDetail = () => {
   const [isLoading, setIsLoading] = useState(true);
@@ -63,7 +63,6 @@ const LocationDetail = () => {
       </button>
     </div>
   );
-
 };
 
 export default LocationDetail;

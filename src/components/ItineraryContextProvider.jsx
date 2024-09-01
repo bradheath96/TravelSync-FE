@@ -1,30 +1,32 @@
 import React, { createContext, useEffect, useState } from "react";
 
-export const GroupItineraryContext = createContext();
+export const ItineraryContext = createContext();
 
-export const GroupItineraryContextProvider = ({ children }) => {
-  const [currentItineraryId, setCurrentItineraryId] = useState(null);
-  const [currentItineraryTitle, setCurrentItineraryTitle] = useState(null);
-  const [currentGroup, setCurrentGroup] = useState({});
+export const ItineraryContextProvider = ({ children }) => {
+  const [currentItinerary, setCurrentItinerary] = useState(() => {
+    const storedItinerary = localStorage.getItem("currentItinerary");
+    return storedItinerary ? JSON.parse(storedItinerary) : null;
+  });
 
   useEffect(() => {
-    setCurrentItineraryId(localStorage.getItem("currentItineraryId"));
-    setCurrentGroup(JSON.parse(localStorage.getItem("currentGroup")));
-    setCurrentItineraryTitle(localStorage.getItem("currentItineraryTitle"));
-  }, []);
+    if (currentItinerary) {
+      localStorage.setItem(
+        "currentItinerary",
+        JSON.stringify(currentItinerary)
+      );
+    } else {
+      localStorage.removeItem("currentItinerary");
+    }
+  }, [currentItinerary]);
 
   return (
-    <GroupItineraryContext.Provider
+    <ItineraryContext.Provider
       value={{
-        currentItineraryId,
-        setCurrentItineraryId,
-        currentGroup,
-        setCurrentGroup,
-        currentItineraryTitle,
-        setCurrentItineraryTitle,
+        currentItinerary,
+        setCurrentItinerary,
       }}
     >
       {children}
-    </GroupItineraryContext.Provider>
+    </ItineraryContext.Provider>
   );
 };

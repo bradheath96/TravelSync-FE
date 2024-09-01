@@ -1,10 +1,10 @@
 .homepage {
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: space-around;
   align-items: center;
-  height: 80%;
-  gap: 2rem;
+  height: 90%;
+  gap: 0.5rem;
 }
 
 .homepage h1 {
@@ -13,16 +13,17 @@
 
 .homepage-container {
   width: 100%;
-  height: 100%;
+  height: calc(100vh - 40px);
   display: flex;
+  padding-bottom: 20px;
   justify-content: center;
   align-items: center;
 }
 
-.userGroupControls {
-  max-width: 800px;
-  margin: 0 auto;
+.userItineraryControls {
+  max-width: 400px;
   padding: 20px;
+  width: 80%;
   background-color: var(--quad-color);
   border-radius: 10px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -38,25 +39,19 @@ li {
   list-style: none;
 }
 
-.userGroupButton {
+.userItineraryButton {
   background-color: var(--secondary-color);
   color: var(--text-color);
   padding: 15px 30px;
   box-shadow: 0 2px 3px rgba(0, 0, 0, 0.2);
   box-sizing: border-box;
 }
-.userGroupList li,
-.userGroupList li button {
+.userItineraryList li,
+.userItineraryList li button {
   width: 100%;
 }
 
-.userGroupList {
-  display: flex;
-  flex-direction: column;
-  gap: 1.5rem;
-}
-
-.joinGroupContainer {
+.joinItineraryContainer {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -70,7 +65,7 @@ li {
   box-sizing: border-box;
 }
 
-.joinGroupContainer input[type="text"] {
+.joinItineraryContainer input[type="text"] {
   padding: 10px;
   font-size: 1rem;
   border: 1px solid var(--quad-color);
@@ -82,7 +77,7 @@ li {
   width: 100%;
 }
 
-.joinGroupContainer form {
+.joinItineraryContainer form {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -92,7 +87,7 @@ li {
   margin-top: 1rem;
 }
 
-.joinGroupContainer label {
+.joinItineraryContainer label {
   font-size: 1rem;
   font-weight: 600;
   color: var(--light-text-color);
@@ -100,13 +95,13 @@ li {
   align-items: center;
 }
 
-.joinGroupContainer input[type="text"]:focus {
+.joinItineraryContainer input[type="text"]:focus {
   outline: none;
   border-color: var(--primary-color);
   box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
 }
 
-.createGroupContainer {
+.createItineraryContainer {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -120,7 +115,7 @@ li {
   box-sizing: border-box;
 }
 
-.createGroupContainer form {
+.createItineraryContainer form {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -130,13 +125,13 @@ li {
   margin-top: 1rem;
 }
 
-.createGroupContainer label {
+.createItineraryContainer label {
   font-size: 1rem;
   font-weight: 600;
   color: var(--light-text-color);
 }
 
-.createGroupContainer input[type="text"] {
+.createItineraryContainer input[type="text"] {
   padding: 10px;
   font-size: 1rem;
   border: 1px solid var(--quad-color);
@@ -148,15 +143,16 @@ li {
   width: 100%;
 }
 
-.createGroupContainer input[type="text"]:focus {
+.createItineraryContainer input[type="text"]:focus {
   outline: none;
   border-color: var(--primary-color);
   box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
 }
 
-.userGroupList {
-  max-width: 800px;
-  margin: 0 auto;
+.userItineraryList {
+  max-width: 400px;
+  width: 80%;
+  margin-top: 20px;
   padding: 20px;
   background-color: var(--quad-color);
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -165,11 +161,11 @@ li {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  gap: 3rem;
+  gap: 0.5rem;
   box-sizing: border-box;
 }
 
-.userGroupList ul {
+.userItineraryList ul {
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
@@ -177,7 +173,7 @@ li {
   margin: 0;
 }
 
-.userGroupButton {
+.userItineraryButton {
   width: 100%;
   padding: 15px 20px;
   background-color: var(--secondary-color);
@@ -190,17 +186,14 @@ li {
   cursor: pointer;
   transition: background-color 0.2s ease, transform 0.2s ease,
     box-shadow 0.2s ease;
-
-  position: relative;
-  overflow: hidden;
 }
 
-.userGroupButton:hover {
+.userItineraryButton:hover {
   transform: translateY(-2px);
   box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);
 }
 
-.userGroupButton p {
+.userItineraryButton p {
   margin: 0;
   padding: 0;
 }
@@ -214,4 +207,5 @@ li {
   align-self: flex-end;
   margin: 10px;
   min-height: 15px;
+  font-size: 10px;
 }

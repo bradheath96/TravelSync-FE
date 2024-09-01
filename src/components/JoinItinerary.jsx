@@ -1,54 +1,52 @@
-import React from "react";
-import { useState } from "react";
-import { joinGroup } from "../utils/axios";
+import React, { useState } from "react";
+import { joinItinerary } from "../axios/index"; // Updated import to use joinItinerary
 
-export default function JoinGroup({ userLoggedIn }) {
-  const [joinGroupForm, setJoinGroupForm] = useState(false);
+export default function JoinItinerary({ userLoggedIn }) {
+  const [joinItineraryForm, setJoinItineraryForm] = useState(false);
 
-  const [groupCodeInput, setGroupCodeInput] = useState("");
+  const [itineraryCodeInput, setItineraryCodeInput] = useState("");
 
   const [message, setMessage] = useState("");
 
   const [error, setError] = useState(null);
 
   function handleClick() {
-    setJoinGroupForm(!joinGroupForm);
+    setJoinItineraryForm(!joinItineraryForm);
   }
 
   function handleChange(event) {
     setMessage("");
-    setGroupCodeInput(event.target.value);
+    setItineraryCodeInput(event.target.value);
   }
 
   function handleSubmit(event) {
     event.preventDefault();
-    joinGroup(userLoggedIn.id, groupCodeInput)
-      .then((response) => {
-        console.log("from then block");
-        setGroupUpdates(true);
-        setMessage("You've successfully joined the group!");
+    joinItinerary(userLoggedIn.id, itineraryCodeInput)
+      .then((data) => {
+        console.log(data);
+        setMessage("You've successfully joined the itinerary!");
         setError(false);
       })
       .catch((response) => {
         if (response.msg === "Request failed with status code 404") {
-          setMessage("Invalid Group Code!");
+          setMessage("Invalid Itinerary Code!");
           setError(true);
         }
       });
   }
 
   return (
-    <div className="joinGroupContainer">
+    <div>
       <button onClick={handleClick} className="styled-button">
-        Join Group
+        Join Itinerary
       </button>
-      {joinGroupForm && (
+      {joinItineraryForm && (
         <form onSubmit={handleSubmit}>
-          <label htmlFor="GroupCode">Group Code:</label>
+          <label htmlFor="ItineraryCode">Itinerary Code:</label>{" "}
           <input
             type="text"
-            id="GroupCode"
-            name="GroupCode"
+            id="ItineraryCode"
+            name="ItineraryCode"
             onChange={handleChange}
           />
           <button className="styled-button">Join</button>

@@ -9,10 +9,8 @@ export default function ReturnToMap() {
   }
 
   return (
-    <div>
-      <button className="returnToMap" onClick={handleReturnToMap}>
-        <img src={addToMap} alt="a button to return to the map" />
-      </button>
-    </div>
+    <button className="returnToMap bottomNavButton" onClick={handleReturnToMap}>
+      <img src={addToMap} alt="a button to return to the map" />
+    </button>
   );
 }

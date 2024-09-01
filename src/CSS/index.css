@@ -7,7 +7,7 @@
 @import "./itinerary.css";
 @import "./locationdetails.css";
 @import "./filestorage.css";
-
+@import "./pageSize.css";
 
 :root {
   /* --background-color: #faf9f5; */
@@ -35,8 +35,7 @@ html {
 body {
   margin-left: 20px;
   margin-right: 20px;
-  padding-top: 40px;
-  padding-bottom: 40px;
+  padding-top: 20px;
   height: 100vh;
   box-sizing: border-box;
   background-color: var(--background-color);
@@ -49,7 +48,6 @@ body {
 
 .app-container,
 #root {
-  height: 100%;
   width: 100%;
 }
 
@@ -59,4 +57,36 @@ body {
   justify-content: space-between;
   align-items: center;
   width: 100%;
+}
+
+.bottomNav {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  width: 90%;
+  padding: 3% 5%;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  border-top-left-radius: 15px;
+  border-top-right-radius: 15px;
+  box-shadow: 0 0 0 4px rgba(0, 0, 0, 0);
+
+  background-color: var(--secondary-color);
+}
+
+.bottomNavButton {
+  width: 20%;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.bottomNavButton img {
+  width: 50%;
+}
+
+.topNav {
+  display: none;
 }

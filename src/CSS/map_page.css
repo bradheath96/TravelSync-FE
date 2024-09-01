@@ -1,16 +1,17 @@
 .mapPage {
-  height: 100%;
+  height: calc(100vh - 140px);
   width: 100%;
   display: flex;
+  padding-bottom: 100px;
   flex-direction: column;
   align-items: center;
-  justify-content: space-evenly;
+  justify-content: space-around;
   gap: 1rem;
 }
 
 .search-bar {
   width: 100%;
-  max-width: 400px;
+  max-width: 600px;
 }
 
 .css-1vm0r4s-MuiPaper-root {

@@ -1,27 +1,31 @@
 import React, { useState, useEffect, useContext } from "react";
-import { GroupItineraryContext } from "./ItineraryContextProvider";
+import { ItineraryContext } from "./ItineraryContextProvider";
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
+import { useNavigate } from "react-router-dom";
 import {
   getItineraryByItineraryID,
   getItineraryEvents,
   updateItineraryOrder,
   deleteEventById,
-} from "../utils/axios";
+} from "../axios/index";
 
+import globe from "../assets/exploreGlobe.png";
 import deleteBin from "../assets/deleteBin.png";
 import reshuffle from "../assets/reshuffle.png";
 
 const ItineraryList = () => {
   const [events, setEvents] = useState([]);
   const [eventOrder, setEventOrder] = useState([]);
-  const { currentItineraryId } = useContext(GroupItineraryContext);
+  const { currentItinerary } = useContext(ItineraryContext);
+  const navigate = useNavigate();
 
   const fetchItineraryData = () => {
-    if (currentItineraryId) {
-      getItineraryByItineraryID(currentItineraryId)
+    if (currentItinerary) {
+      getItineraryByItineraryID(currentItinerary.id)
         .then(({ itinerary_order }) => {
+          console.log(itinerary_order);
           setEventOrder(itinerary_order);
-          return getItineraryEvents(currentItineraryId);
+          return getItineraryEvents(currentItinerary.id);
         })
         .then((eventList) => {
           setEvents(eventList);
@@ -34,7 +38,7 @@ const ItineraryList = () => {
 
   useEffect(() => {
     fetchItineraryData();
-  }, [currentItineraryId]);
+  }, [currentItinerary]);
 
   function handleDeleteEvent(event_id) {
     deleteEventById(event_id)
@@ -60,14 +64,26 @@ const ItineraryList = () => {
 
     setEventOrder(newEventOrder);
 
-    updateItineraryOrder(currentItineraryId, newEventOrder)
+    updateItineraryOrder(currentItinerary.id, newEventOrder)
       .then((response) => console.log("Itinerary updated:", response))
       .catch((error) =>
         console.error("Error updating itinerary order:", error)
       );
   };
 
-  return (
+  function handleGoToMap() {
+    navigate("/map");
+  }
+
+  return eventOrder.length === 0 ? (
+    <div className="noLocations">
+      <button onClick={handleGoToMap}>
+        <p>You dont yet have any locations saved</p>
+        <p>click here to add a location</p>
+        <img src={globe} alt="" />
+      </button>
+    </div>
+  ) : (
     <DragDropContext onDragEnd={onDragEnd}>
       <Droppable droppableId="droppable">
         {(provided) => (
@@ -79,6 +95,7 @@ const ItineraryList = () => {
               backgroundColor: "var(--quad-color)",
               padding: "15px",
               borderRadius: "8px",
+              width: "80%",
               maxWidth: "700px",
             }}
           >

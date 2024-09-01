@@ -1,19 +1,19 @@
 import SearchBar from "./SearchBar";
 import React, { useContext, useEffect, useState } from "react";
-import { getNearbyLocations, getSingleLocation } from "../utils/axios";
+import { getNearbyLocations, getSingleLocation } from "../axios/index";
 import LargeMap from "./LargeMap";
 import TypeMenu from "./TypeMenu";
 import debounce from "lodash.debounce";
 import Slider from "@mui/material/Slider";
 import { LocationContext } from "./LocationsContextProvider";
 import { useNavigate } from "react-router-dom";
-import HomeHeader from "./HomeHeader";
-import { GroupItineraryContext } from "./ItineraryContextProvider";
+import HomeHeader from "./Header";
+import BottomNav from "./BottomNav";
+import TopNav from "./topNav";
 
 export default function MapPage() {
   const [search, setSearch] = useState("");
   const navigate = useNavigate();
-  const { currentItineraryId } = useContext(GroupItineraryContext);
   const { locationsList, setLocationsList } = useContext(LocationContext);
   const [mainLocation, setMainLocation] = useState(
     locationsList ? locationsList[0] : null
@@ -72,6 +72,7 @@ export default function MapPage() {
 
   return (
     <div className="mapPage">
+      <TopNav />
       <HomeHeader />
       <SearchBar setSearch={setSearch} />
       <div className="nearbyAndType">
@@ -103,9 +104,7 @@ export default function MapPage() {
         lat={lat}
         lng={lng}
       />
-      <button className="styled-button" onClick={handleGoToItineraryClick}>
-        Itinerary
-      </button>
+      <BottomNav />
     </div>
   );
 }

@@ -7,14 +7,14 @@ import { LocationsContextProvider } from "./components/LocationsContextProvider"
 import Homepage from "./components/Homepage";
 import { UserContextProvider } from "./components/UserContextProvider";
 import { LoginPage } from "./components/LoginPage";
-import { GroupItineraryContextProvider } from "./components/ItineraryContextProvider";
+import { ItineraryContextProvider } from "./components/ItineraryContextProvider";
 import FilesPage from "./components/FilesPage";
 
 function App() {
   return (
     <UserContextProvider>
       <LocationsContextProvider>
-        <GroupItineraryContextProvider>
+        <ItineraryContextProvider>
           <div className="app-container">
             <Routes className="app-container">
               {/* Change this path later */}
@@ -29,7 +29,7 @@ function App() {
               <Route path="/files_page" element={<FilesPage />} />
             </Routes>
           </div>
-        </GroupItineraryContextProvider>
+        </ItineraryContextProvider>
       </LocationsContextProvider>
     </UserContextProvider>
   );

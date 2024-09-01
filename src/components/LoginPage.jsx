@@ -1,7 +1,7 @@
 import { TextField } from "@mui/material";
 import { UserContext } from "./UserContextProvider";
 import { useContext, useState } from "react";
-import { createUser, getUser } from "../utils/axios";
+import { createUser, getUser } from "../axios/index";
 import { useNavigate } from "react-router-dom";
 import logo from "../assets/TravelSync.png";
 
