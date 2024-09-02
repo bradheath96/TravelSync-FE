@@ -1,10 +1,19 @@
-export default function JoinItinerary({ isHidden, setIsHidden, setIsJoin }) {
+export default function JoinItinerary({
+  isHidden,
+  setIsHidden,
+  setIsJoin,
+  isJoin,
+}) {
   function handleClick() {
     if (isHidden) {
       setIsJoin(false);
       setIsHidden(false);
     } else {
-      setIsHidden(true);
+      if (isJoin) {
+        setIsJoin(false);
+      } else {
+        setIsHidden(true);
+      }
     }
   }
 

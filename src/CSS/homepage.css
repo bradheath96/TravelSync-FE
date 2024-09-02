@@ -13,9 +13,8 @@
 
 .homepage-container {
   width: 100%;
-  height: calc(100vh - 40px);
   display: flex;
-  padding-bottom: 20px;
+  padding-bottom: 40px;
   justify-content: center;
   align-items: center;
 }
@@ -112,6 +111,10 @@ li {
   font-size: 10px;
 }
 
+.createAndJoin {
+  width: 100%;
+}
+
 .CreateAndJoinButtons {
   display: flex;
   flex-direction: row;
@@ -119,11 +122,15 @@ li {
 }
 
 .CreateButton {
-  min-width: 110px;
+  max-width: 110px;
+  width: 40%;
+  font-size: 50%;
 }
 
 .JoinButton {
-  min-width: 110px;
+  max-width: 110px;
+  width: 40%;
+  font-size: 50%;
 }
 
 .homeSearchContainer {

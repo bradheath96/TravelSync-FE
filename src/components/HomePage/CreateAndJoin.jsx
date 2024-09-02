@@ -14,11 +14,13 @@ export default function CreateAndJoin({ setItineraryUpdates }) {
         <JoinItinerary
           setIsHidden={setIsHidden}
           setIsJoin={setIsJoin}
+          isJoin={isJoin}
           isHidden={isHidden}
         />
         <CreateItinerary
           setIsHidden={setIsHidden}
           setIsJoin={setIsJoin}
+          isJoin={isJoin}
           isHidden={isHidden}
         />
       </div>
@@ -26,6 +28,7 @@ export default function CreateAndJoin({ setItineraryUpdates }) {
         isHidden={isHidden}
         isJoin={isJoin}
         setItineraryUpdates={setItineraryUpdates}
+        setIsHidden={setIsHidden}
       />
     </div>
   );

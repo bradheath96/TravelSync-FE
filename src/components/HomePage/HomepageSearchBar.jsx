@@ -6,6 +6,7 @@ export default function HomepageSearchBar({
   isHidden,
   isJoin,
   setItineraryUpdates,
+  setIsHidden,
 }) {
   const [input, setInput] = useState("");
   const { currentUser } = useAuth();
@@ -14,30 +15,32 @@ export default function HomepageSearchBar({
   useEffect(() => {
     setInput("");
     setMessage("");
-  }, [isHidden]);
+  }, [isHidden, isJoin]);
 
   function handleJoinSubmit(event) {
     event.preventDefault();
     joinItinerary(currentUser.uid, input)
       .then((data) => {
         console.log(data);
-        setMessage("You've successfully joined the itinerary!");
         setItineraryUpdates(true);
+        setInput("");
+        setIsHidden(true);
         setError(false);
       })
       .catch((response) => {
-        if (response.msg === "Request failed with status code 404") {
+        if (response.status === 404) {
           setMessage("Invalid Itinerary Code!");
-          setError(true);
         }
       });
   }
 
   function handleCreateSubmit(event) {
     event.preventDefault();
-    createItinerary(currentInput).then((itinerary) => {
-      joinItinerary(userLoggedIn.id, itinerary.join_code).then((response) => {
+    createItinerary(input).then((itinerary) => {
+      joinItinerary(currentUser.uid, itinerary.join_code).then((response) => {
         setItineraryUpdates(true);
+        setInput("");
+        setIsHidden(true);
       });
     });
     setCurrentInput("");
