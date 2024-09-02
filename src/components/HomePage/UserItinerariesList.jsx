@@ -19,6 +19,7 @@ export default function UserItinerariesList({
   useEffect(() => {
     setIsLoading(true);
     setIsError(false);
+    console.log(currentUser);
     getUserItineraries(currentUser.uid)
       .then((itineraries) => {
         setIsLoading(false);
