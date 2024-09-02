@@ -1,6 +1,6 @@
 import React from "react";
 import Lottie from "lottie-react";
-import animationData from "../assets/uploadAnimation.json";
+import animationData from "../../assets/uploadAnimation.json";
 
 export default function UploadAnimation() {
   return (

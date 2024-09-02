@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { useContext } from "react";
-import { ItineraryContext } from "./ItineraryContextProvider";
-import { getFiles } from "../axios";
-import deleteBin from "../assets/deleteBin.png";
-import documentIcon from "../assets/document.png";
-import emptyFile from "../assets/emptyFile.png";
+import { ItineraryContext } from "../Context/ItineraryContextProvider";
+import { getFiles } from "../../axios";
+import deleteBin from "../../assets/deleteBin.png";
+import documentIcon from "../../assets/document.png";
+import emptyFile from "../../assets/emptyFile.png";
 
 export default function FilesList({ updateFiles, setUpdateFiles }) {
   const { currentItinerary } = useContext(ItineraryContext);

@@ -1,7 +1,7 @@
 import { useEffect, useRef } from "react";
 import mapboxgl from "mapbox-gl";
-import mapBoxAccessCode from "../utils/map_box_access_key";
-import "../CSS/map_box.css";
+import mapBoxAccessCode from "../../utils/map_box_access_key";
+import "../../CSS/map_box.css";
 
 mapboxgl.accessToken = mapBoxAccessCode;
 

@@ -1,4 +1,4 @@
-import addToMap from "../assets/AddToMap.png";
+import addToMap from "../../assets/AddToMap.png";
 import { useNavigate } from "react-router-dom";
 
 export default function ReturnToMap() {

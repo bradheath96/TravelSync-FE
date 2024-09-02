@@ -1,8 +1,8 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import { useContext } from "react";
-import { ItineraryContext } from "./ItineraryContextProvider";
-import homeIcon from "../assets/homeIcon.png";
+import { ItineraryContext } from "../Context/ItineraryContextProvider";
+import homeIcon from "../../assets/homeIcon.png";
 export default function HomeButton() {
   const { setCurrentItinerary } = useContext(ItineraryContext);
 

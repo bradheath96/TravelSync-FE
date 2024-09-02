@@ -1,5 +1,5 @@
 import React from "react";
-import itineraryImage from "../assets/ItineraryIcon.png";
+import itineraryImage from "../../assets/ItineraryIcon.png";
 import { useNavigate } from "react-router-dom";
 export default function GoToItineraryButton() {
   const navigate = useNavigate();

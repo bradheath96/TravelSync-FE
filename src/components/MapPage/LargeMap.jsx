@@ -1,10 +1,10 @@
 import React, { useRef, useEffect, useState, useContext } from "react";
 import mapboxgl from "mapbox-gl";
-import mapBoxAccessCode from "../utils/map_box_access_key";
-import "../CSS/map_box.css";
+import mapBoxAccessCode from "../../utils/map_box_access_key";
+import "../../CSS/map_box.css";
 import { useNavigate } from "react-router-dom";
-import { ItineraryContext } from "./ItineraryContextProvider";
-import { addLocationToItinerary } from "../axios/index";
+import { ItineraryContext } from "../Context/ItineraryContextProvider";
+import { addLocationToItinerary } from "../../axios/index";
 mapboxgl.accessToken = mapBoxAccessCode;
 
 export default function LargeMap({ locationsList, lat, lng }) {

@@ -1,15 +1,15 @@
 import SearchBar from "./SearchBar";
 import React, { useContext, useEffect, useState } from "react";
-import { getNearbyLocations, getSingleLocation } from "../axios/index";
+import { getNearbyLocations, getSingleLocation } from "../../axios/index";
 import LargeMap from "./LargeMap";
 import TypeMenu from "./TypeMenu";
 import debounce from "lodash.debounce";
 import Slider from "@mui/material/Slider";
-import { LocationContext } from "./LocationsContextProvider";
+import { LocationContext } from "../Context/LocationsContextProvider";
 import { useNavigate } from "react-router-dom";
-import HomeHeader from "./Header";
-import BottomNav from "./BottomNav";
-import TopNav from "./topNav";
+import HomeHeader from "../General/Header";
+import BottomNav from "../NavBar/BottomNav";
+import TopNav from "../NavBar/TopNav";
 
 export default function MapPage() {
   const [search, setSearch] = useState("");

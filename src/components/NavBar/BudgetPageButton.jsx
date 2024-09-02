@@ -1,5 +1,5 @@
 import React from "react";
-import budget from "../assets/budget.png";
+import budget from "../../assets/budget.png";
 
 export default function BudgetPage() {
   return (

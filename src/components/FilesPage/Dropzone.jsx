@@ -1,8 +1,8 @@
 import React, { useCallback, useState } from "react";
 import { useDropzone } from "react-dropzone";
-import { uploadFile } from "../axios";
+import { uploadFile } from "../../axios";
 import { useContext } from "react";
-import { ItineraryContext } from "./ItineraryContextProvider";
+import { ItineraryContext } from "../Context/ItineraryContextProvider";
 import UploadAnimation from "./UploadAnimation";
 
 export default function MyDropzone({ setUpdateFiles }) {

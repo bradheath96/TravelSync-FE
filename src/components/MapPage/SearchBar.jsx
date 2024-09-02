@@ -1,7 +1,7 @@
 import { Search } from "@mui/icons-material";
 import { Divider, IconButton, InputBase, Paper } from "@mui/material";
 import { useState } from "react";
-import "../CSS/index.css";
+import "../../CSS/index.css";
 
 function SearchBar({ setSearch }) {
   const [currSearch, setCurrSear] = useState("");

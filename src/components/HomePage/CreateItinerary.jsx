@@ -1,6 +1,6 @@
 import { useState, useContext } from "react";
-import { createItinerary, joinItinerary } from "../axios/index";
-import { UserContext } from "./UserContextProvider";
+import { createItinerary, joinItinerary } from "../../axios/index";
+import { UserContext } from "../Context/UserContextProvider";
 
 export default function CreateItinerary({ setItineraryUpdates }) {
   const [currentInput, setCurrentInput] = useState("");

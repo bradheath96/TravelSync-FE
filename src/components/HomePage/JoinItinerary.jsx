@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { joinItinerary } from "../axios/index"; // Updated import to use joinItinerary
+import { joinItinerary } from "../../axios/index"; // Updated import to use joinItinerary
 
 export default function JoinItinerary({ userLoggedIn }) {
   const [joinItineraryForm, setJoinItineraryForm] = useState(false);

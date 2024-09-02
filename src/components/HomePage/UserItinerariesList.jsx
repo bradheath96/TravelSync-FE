@@ -1,8 +1,8 @@
 import React, { useEffect, useState, useContext } from "react";
-import { UserContext } from "./UserContextProvider";
-import { getUserItineraries } from "../axios/index";
+import { UserContext } from "../Context/UserContextProvider";
+import { getUserItineraries } from "../../axios/index";
 import { useNavigate } from "react-router-dom";
-import { ItineraryContext } from "./ItineraryContextProvider";
+import { ItineraryContext } from "../Context/ItineraryContextProvider";
 
 export default function UserItinerariesList({
   itineraryUpdates,

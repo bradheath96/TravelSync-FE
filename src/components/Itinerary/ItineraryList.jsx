@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from "react";
-import { ItineraryContext } from "./ItineraryContextProvider";
+import { ItineraryContext } from "../Context/ItineraryContextProvider";
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 import { useNavigate } from "react-router-dom";
 import {
@@ -7,11 +7,11 @@ import {
   getItineraryEvents,
   updateItineraryOrder,
   deleteEventById,
-} from "../axios/index";
+} from "../../axios/index";
 
-import globe from "../assets/exploreGlobe.png";
-import deleteBin from "../assets/deleteBin.png";
-import reshuffle from "../assets/reshuffle.png";
+import globe from "../../assets/exploreGlobe.png";
+import deleteBin from "../../assets/deleteBin.png";
+import reshuffle from "../../assets/reshuffle.png";
 
 const ItineraryList = () => {
   const [events, setEvents] = useState([]);

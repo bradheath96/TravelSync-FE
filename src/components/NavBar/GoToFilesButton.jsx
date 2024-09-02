@@ -1,5 +1,5 @@
 import React from "react";
-import fileImage from "../assets/files.png";
+import fileImage from "../../assets/files.png";
 import { useNavigate } from "react-router-dom";
 
 export default function GoToFilesButton() {

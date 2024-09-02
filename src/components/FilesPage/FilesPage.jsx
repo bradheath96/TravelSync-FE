@@ -3,8 +3,8 @@ import MyDropzone from "./Dropzone";
 import { useNavigate } from "react-router-dom";
 import FilesList from "./FilesList";
 import { useState } from "react";
-import BottomNav from "./BottomNav";
-import TopNav from "./topNav";
+import BottomNav from "../NavBar/BottomNav";
+import TopNav from "../NavBar/TopNav";
 
 export default function FilesPage() {
   const navigate = useNavigate();
