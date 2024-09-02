@@ -115,6 +115,8 @@ li {
 .CreateAndJoinButtons {
   display: flex;
   flex-direction: row;
+  justify-content: center;
+  align-items: center;
   gap: 1.5rem;
 }
 
@@ -150,17 +152,23 @@ li {
 
 .homeSearchBar input {
   border: none;
-  border-radius: 15px;
-  padding: 10px;
+  outline: none;
+  border-radius: 5px;
+  padding: 8px;
   padding-left: 15px;
-  background-color: #e8e8e8;
-  box-shadow: 6px 6px 12px #ffffff, -6px -6px 12px #c5c5c5;
+  background-color: #ffffffcd;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
   font-size: small;
   font-weight: bold;
   max-width: 200px;
+  transition: 300ms ease-in-out;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  max-width: 300px;
+  box-sizing: border-box;
 }
 
 .homeSearchBar input:focus {
-  outline-color: white;
-  place-content: "Enter your message!";
+  transform: scale(1.05);
+  box-shadow: 13px 13px 100px #969696, -13px -13px 100px #ffffff;
 }
