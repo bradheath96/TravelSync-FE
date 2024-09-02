@@ -66,9 +66,7 @@ export default function Login() {
       {userLoggedIn && <Navigate to={"/"} replace={true} />}
       <div className="login">
         <img src={logo} alt="our Logo" className="loginLogo" />
-        <button className="styled-button" onClick={handleDemoMode}>
-          Click here for Demo mode
-        </button>
+
         <div className="loginFormContainer">
           <h3>Welcome Back</h3>
           <form onSubmit={onSubmit} className="sign-up-form">
@@ -115,11 +113,6 @@ export default function Login() {
               Sign up
             </Link>
           </p>
-          <div className="flex flex-row text-center w-full">
-            <div className="border-b-2 mb-2.5 mr-2 w-full"></div>
-            <div className="text-sm font-bold w-fit">OR</div>
-            <div className="border-b-2 mb-2.5 ml-2 w-full"></div>
-          </div>
           <button
             disabled={isSigningIn}
             onClick={(e) => {
@@ -131,6 +124,9 @@ export default function Login() {
             {isSigningIn ? "Signing In..." : "Continue with Google"}
           </button>
         </div>
+        <button className="styled-button" onClick={handleDemoMode}>
+          Click here for Demo mode
+        </button>
       </div>
     </div>
   );

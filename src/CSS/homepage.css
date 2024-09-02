@@ -3,18 +3,21 @@
   flex-direction: column;
   justify-content: space-around;
   align-items: center;
-  height: 90%;
   gap: 0.5rem;
+  height: 80%;
 }
 
 .homepage h1 {
-  scale: 0.8;
+  scale: 0.7;
+  text-align: center;
 }
 
 .homepage-container {
   width: 100%;
+  height: calc(100vh - 20px);
   display: flex;
   padding-bottom: 40px;
+  box-sizing: border-box;
   justify-content: center;
   align-items: center;
 }
@@ -38,15 +41,7 @@ li {
   list-style: none;
 }
 
-.userItineraryButton {
-  background-color: var(--secondary-color);
-  color: var(--text-color);
-  padding: 15px 30px;
-  box-shadow: 0 2px 3px rgba(0, 0, 0, 0.2);
-  box-sizing: border-box;
-}
-.userItineraryList li,
-.userItineraryList li button {
+.userItineraryList li {
   width: 100%;
 }
 
@@ -76,15 +71,17 @@ li {
 
 .userItineraryButton {
   width: 100%;
-  padding: 15px 20px;
+  padding: 10px;
   background-color: var(--secondary-color);
   color: var(--text-color);
   border: none;
   border-radius: 8px;
-  font-size: 20px;
+  font-size: 15px;
   font-weight: 700;
   text-align: center;
   cursor: pointer;
+  box-shadow: 0 2px 3px rgba(0, 0, 0, 0.2);
+  box-sizing: border-box;
   transition: background-color 0.2s ease, transform 0.2s ease,
     box-shadow 0.2s ease;
 }
@@ -124,13 +121,13 @@ li {
 .CreateButton {
   max-width: 110px;
   width: 40%;
-  font-size: 50%;
+  font-size: 45%;
 }
 
 .JoinButton {
   max-width: 110px;
   width: 40%;
-  font-size: 50%;
+  font-size: 45%;
 }
 
 .homeSearchContainer {

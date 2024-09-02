@@ -24,6 +24,13 @@
   cursor: pointer;
   border-radius: 3px;
 }
+.mapboxgl-ctrl-logo {
+  display: none !important;
+}
+
+.mapboxgl-ctrl-attrib-button {
+  z-index: 0;
+}
 
 .mapboxgl-small-popup-content {
   max-height: 30px;
