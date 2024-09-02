@@ -116,7 +116,7 @@ export default function LargeMap({ locationsList, lat, lng }) {
   return (
     <div
       ref={mapContainer}
-      style={{ width: "100%", height: "60%", marginBottom: "30px" }}
+      style={{ width: "100%", height: "60%", marginBottom: "0px" }}
       className="map-container"
     />
   );

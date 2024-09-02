@@ -46,3 +46,21 @@
 .nearbyAndType button {
   padding: 16.5px;
 }
+
+.googleMapButton img {
+  width: 20px;
+}
+
+.googleMapButton {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  gap: 0.5rem;
+}
+
+.googleMapButton p {
+  margin: 0 !important;
+  font-size: 10px !important;
+}

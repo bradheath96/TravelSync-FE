@@ -2,6 +2,9 @@ import { useEffect, useState } from "react";
 import SmallMap from "./SmallMap";
 import { useParams, useNavigate } from "react-router-dom";
 import { getPlaceDetail } from "../../axios/index";
+import OpenInGoogleMapsButton from "./OpenInGoogleMaps";
+import BottomNav from "../NavBar/BottomNav";
+import StarRating from "./StarRating";
 
 const LocationDetail = () => {
   const [isLoading, setIsLoading] = useState(true);
@@ -16,6 +19,7 @@ const LocationDetail = () => {
     getPlaceDetail(place_id)
       .then((placeDetail) => {
         setIsLoading(false);
+        console.log(placeDetail);
         const typeWords = placeDetail.types[0].split("_").map((word) => {
           return word[0].toUpperCase() + word.slice(1);
         });
@@ -28,39 +32,47 @@ const LocationDetail = () => {
       });
   }, [place_id]);
 
-  function handleReturnToSearch() {
-    navigate(`/map`);
-  }
-
   return isError ? (
     "Error fetching place detail"
   ) : isLoading ? (
     "page loading"
   ) : (
-    <div className="location-detail-container">
-      <h1>{placeDetail.name}</h1>
-      <h3>{placeDetail.type}</h3>
-      {placeDetail.editorial_summary && (
-        <p>{placeDetail.editorial_summary.overview}</p>
-      )}
-      {placeDetail.rating && <h3>Rating: {placeDetail.rating}</h3>}
-      {placeDetail.opening_hours && (
-        <ul>
-          <h4>Opening Times:</h4>
-          {placeDetail.opening_hours.weekday_text.map((day) => (
-            <li key={day}>{day}</li>
-          ))}
-        </ul>
-      )}
-      <SmallMap
-        location={{
-          name: placeDetail.name,
-          "co-ords": placeDetail.geometry.location,
-        }}
-      />
-      <button className="return-button" onClick={handleReturnToSearch}>
-        Return
-      </button>
+    <div className="location-detail-page">
+      <div className="location-detail-container">
+        <h1>
+          {placeDetail.name} ({placeDetail.type})
+          {placeDetail.rating && <StarRating RawRating={placeDetail.rating} />}
+        </h1>
+        {placeDetail.editorial_summary && (
+          <p>{placeDetail.editorial_summary.overview}</p>
+        )}
+
+        {placeDetail.opening_hours && (
+          <ul>
+            <h4>Opening Times:</h4>
+            {placeDetail.opening_hours.weekday_text.map((day) => (
+              <li key={day}>{day}</li>
+            ))}
+          </ul>
+        )}
+        <SmallMap
+          location={{
+            name: placeDetail.name,
+            "co-ords": placeDetail.geometry.location,
+          }}
+        />
+        <div className="location-detail-buttons">
+          {/* <button className="styled-button" onClick={handleReturnToSearch}>
+            Return
+          </button> */}
+          <OpenInGoogleMapsButton
+            name={placeDetail.name}
+            lat={placeDetail.geometry.location.lat}
+            lng={placeDetail.geometry.location.lng}
+          />
+        </div>
+      </div>
+      <BottomNav />
     </div>
   );
 };

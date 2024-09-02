@@ -26,7 +26,7 @@ const SmallMap = ({ location }) => {
   return (
     <div
       ref={mapContainer}
-      style={{ width: "50%", height: "250px" }}
+      style={{ width: "100%", height: "250px" }}
       className="map-container"
     />
   );
