@@ -1,14 +1,14 @@
 import React, { useEffect, useState, useContext } from "react";
-import { UserContext } from "../Context/UserContextProvider";
 import { getUserItineraries } from "../../axios/index";
 import { useNavigate } from "react-router-dom";
 import { ItineraryContext } from "../Context/ItineraryContextProvider";
+import { useAuth } from "../Context/AuthContext";
 
 export default function UserItinerariesList({
   itineraryUpdates,
   setItineraryUpdates,
 }) {
-  const { userLoggedIn } = useContext(UserContext);
+  const { currentUser } = useAuth();
   const { setCurrentItinerary } = useContext(ItineraryContext);
 
   const [isLoading, setIsLoading] = useState(true);
@@ -19,7 +19,7 @@ export default function UserItinerariesList({
   useEffect(() => {
     setIsLoading(true);
     setIsError(false);
-    getUserItineraries(userLoggedIn.id)
+    getUserItineraries(currentUser.uid)
       .then((itineraries) => {
         setIsLoading(false);
         setUserItineraries(itineraries);
@@ -43,6 +43,9 @@ export default function UserItinerariesList({
   ) : (
     <div>
       <ul>
+        {userItineraries.length < 1 && (
+          <p>Click above to create or join a group</p>
+        )}
         {userItineraries.map((itinerary) => (
           <li key={itinerary.id}>
             <button

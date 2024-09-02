@@ -22,28 +22,35 @@
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
   display: flex;
   width: calc(100% - 40px);
+  max-width: 500px;
 }
 
 .sign-up-form {
-  flex: 0 0 100%;
-  min-width: 100%;
+  padding: 30px 0;
+
+  display: flex;
+  min-width: 100px;
   display: flex;
   gap: 1rem;
   flex-direction: column;
-  align-items: center;
+  justify-content: center;
+  align-items: flex-end;
 }
 
 .login-form {
-  flex: 0 0 100%;
-  min-width: 100%;
+  padding-top: 20px;
+  display: flex;
+  min-width: 100px;
   display: flex;
   flex-direction: column;
-  align-items: center;
+  justify-content: center;
+  align-items: flex-end;
   min-height: 246px;
 }
 
 .form-input {
   max-width: 300px;
+  margin-left: 30px;
 }
 
 .switch-button {
@@ -56,4 +63,27 @@
 
 .loginLogo {
   width: 60%;
+  max-width: 700px;
+}
+
+.sign-up-button {
+  margin: 10px;
+  align-self: center;
+}
+
+.google-sign-in {
+  margin-top: 10px;
+  background: none;
+  border: none;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 15px;
+}
+
+.continue-google-img {
+  width: 30px;
+  max-width: 30px;
 }

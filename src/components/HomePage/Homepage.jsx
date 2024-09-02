@@ -7,12 +7,14 @@ import { useNavigate } from "react-router-dom";
 import { ItineraryContext } from "../Context/ItineraryContextProvider";
 import { useAuth } from "../Context/AuthContext/index";
 import { doSignOut } from "../../firebase/auth";
+import { getUser } from "../../axios";
+import CreateAndJoin from "./CreateAndJoin";
 
 export default function Homepage() {
-  const { userLoggedIn } = useAuth();
+  const { userLoggedIn, currentUser } = useAuth();
   const { setCurrentItinerary } = useContext(ItineraryContext);
-  const { currentUser } = useAuth();
   console.log(currentUser);
+  const [name, setName] = useState("");
 
   const [itineraryUpdates, setItineraryUpdates] = useState(false);
 
@@ -20,6 +22,10 @@ export default function Homepage() {
 
   useEffect(() => {
     setCurrentItinerary(null);
+
+    getUser(currentUser.uid).then((user) => {
+      setName(user.name);
+    });
   }, []);
 
   const handleOnClick = () => {
@@ -35,11 +41,10 @@ export default function Homepage() {
           Sign Out
         </button>
         <img className="logo" src={logo} alt="logo" />
-        <h1>Hello {currentUser.displayName}</h1>
+        <h1>Hello {name}</h1>
         <div className="profileSection"></div>
         <div className="userItineraryControls">
-          <CreateItinerary setItineraryUpdates={setItineraryUpdates} />
-          <JoinItinerary setItineraryUpdates={setItineraryUpdates} />
+          <CreateAndJoin setItineraryUpdates={setItineraryUpdates} />
         </div>
         <div className="userItineraryList">
           <h4>Itineraries:</h4>

@@ -51,104 +51,6 @@ li {
   width: 100%;
 }
 
-.joinItineraryContainer {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 1rem;
-  width: 100%;
-  max-width: 400px;
-  margin: 0 auto;
-  padding: 10px;
-  background-color: var(--quad-color);
-  box-sizing: border-box;
-}
-
-.joinItineraryContainer input[type="text"] {
-  padding: 10px;
-  font-size: 1rem;
-  border: 1px solid var(--quad-color);
-  border-radius: 5px;
-  background-color: white;
-  color: var(--text-color);
-  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
-  box-sizing: border-box;
-  width: 100%;
-}
-
-.joinItineraryContainer form {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 1rem;
-  width: 100%;
-  max-width: 400px;
-  margin-top: 1rem;
-}
-
-.joinItineraryContainer label {
-  font-size: 1rem;
-  font-weight: 600;
-  color: var(--light-text-color);
-  justify-content: center;
-  align-items: center;
-}
-
-.joinItineraryContainer input[type="text"]:focus {
-  outline: none;
-  border-color: var(--primary-color);
-  box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
-}
-
-.createItineraryContainer {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 1rem;
-  width: 100%;
-  max-width: 400px;
-  margin: 0 auto;
-  padding: 10px;
-  background-color: var(--quad-color);
-  box-sizing: border-box;
-}
-
-.createItineraryContainer form {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 1rem;
-  width: 100%;
-  max-width: 400px;
-  margin-top: 1rem;
-}
-
-.createItineraryContainer label {
-  font-size: 1rem;
-  font-weight: 600;
-  color: var(--light-text-color);
-}
-
-.createItineraryContainer input[type="text"] {
-  padding: 10px;
-  font-size: 1rem;
-  border: 1px solid var(--quad-color);
-  border-radius: 5px;
-  background-color: white;
-  color: var(--text-color);
-  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
-  box-sizing: border-box;
-  width: 100%;
-}
-
-.createItineraryContainer input[type="text"]:focus {
-  outline: none;
-  border-color: var(--primary-color);
-  box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
-}
-
 .userItineraryList {
   max-width: 400px;
   width: 80%;
@@ -208,4 +110,53 @@ li {
   margin: 10px;
   min-height: 15px;
   font-size: 10px;
+}
+
+.CreateAndJoinButtons {
+  display: flex;
+  flex-direction: row;
+  gap: 1.5rem;
+}
+
+.CreateButton {
+  min-width: 110px;
+}
+
+.JoinButton {
+  min-width: 110px;
+}
+
+.homeSearchContainer {
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.homeSearchBar {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+  gap: 1rem;
+}
+
+.homeSearchBar button {
+  max-width: 100px;
+}
+
+.homeSearchBar input {
+  border: none;
+  border-radius: 15px;
+  padding: 10px;
+  padding-left: 15px;
+  background-color: #e8e8e8;
+  box-shadow: 6px 6px 12px #ffffff, -6px -6px 12px #c5c5c5;
+  font-size: small;
+  font-weight: bold;
+  max-width: 200px;
+}
+
+.homeSearchBar input:focus {
+  outline-color: white;
+  place-content: "Enter your message!";
 }
