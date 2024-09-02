@@ -70,7 +70,7 @@ export default function HomepageSearchBar({
             setInput(e.target.value);
           }}
         />
-        <button className="styled-button">Join</button>
+        <button className="styled-button">{isJoin ? "Join" : "Create"}</button>
       </form>
     </div>
   );
