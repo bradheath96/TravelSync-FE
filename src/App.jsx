@@ -10,6 +10,7 @@ import { ItineraryContextProvider } from "./components/Context/ItineraryContextP
 import FilesPage from "./components/FilesPage/FilesPage";
 import SignUp from "./components/Auth/SignUp";
 import { useAuth } from "./components/Context/AuthContext";
+import { Navigate } from "react-router-dom";
 
 function App() {
   const { userLoggedIn } = useAuth();
