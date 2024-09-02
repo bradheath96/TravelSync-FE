@@ -32,6 +32,7 @@
     "react-dropzone": "^14.2.3",
     "react-lottie": "^1.2.4",
     "react-router-dom": "^6.26.1",
+    "serve": "^14.2.3",
     "vite": "^5.4.2"
   }
 }
