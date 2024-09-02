@@ -18,8 +18,10 @@ const ItineraryList = () => {
   const [eventOrder, setEventOrder] = useState([]);
   const { currentItinerary } = useContext(ItineraryContext);
   const navigate = useNavigate();
+  const [isLoading, setIsLoading] = useState(true);
 
   const fetchItineraryData = () => {
+    setIsLoading(true);
     if (currentItinerary) {
       getItineraryByItineraryID(currentItinerary.id)
         .then(({ itinerary_order }) => {
@@ -29,10 +31,11 @@ const ItineraryList = () => {
         })
         .then((eventList) => {
           setEvents(eventList);
+          setIsLoading(false);
         })
-        .catch((error) =>
-          console.error("Error fetching itinerary details:", error)
-        );
+        .catch((error) => {
+          setIsLoading(false);
+        });
     }
   };
 
@@ -75,7 +78,9 @@ const ItineraryList = () => {
     navigate("/map");
   }
 
-  return eventOrder.length === 0 ? (
+  return isLoading ? (
+    "loading"
+  ) : eventOrder.length === 0 ? (
     <div className="noLocations">
       <button onClick={handleGoToMap}>
         <p>You dont yet have any locations saved</p>
