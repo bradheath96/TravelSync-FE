@@ -19,7 +19,7 @@
   --mainpin-color: #c5ebc3;
   --quad-color: #e4f6e3;
   --background-color: #f0faef;
-  --nav-color: rgba(116, 190, 202, 0.452);
+  --nav-color: #cce7eb;
 }
 
 * {
@@ -102,4 +102,8 @@ body {
 .topNavText {
   text-align: center;
   color: black;
+}
+
+.bottomNavButton img:hover {
+  scale: 1.02;
 }

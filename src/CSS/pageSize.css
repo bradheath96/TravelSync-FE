@@ -16,11 +16,12 @@
     padding-bottom: 0px;
   }
   .topNav button {
-    background-color: var(--secondary-color);
     width: 15%;
     padding: 10px;
     border-radius: 12px;
     max-width: 60px;
+    box-shadow: 4px 8px 12px rgba(0.1, 0.1, 0.1, 0.277);
+    background-color: var(--nav-color);
   }
 }
 

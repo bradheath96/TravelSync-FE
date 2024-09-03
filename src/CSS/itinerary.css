@@ -63,3 +63,13 @@
   background-color: var(--tertiary-color);
   border: none;
 }
+
+.itineraryDetail {
+  text-decoration: none;
+  color: var(--text-color);
+}
+
+.itineraryDetail:hover {
+  text-decoration: underline;
+  text-underline-offset: 0.5rem;
+}
