@@ -11,8 +11,8 @@ import star4 from "../../assets/star-ratings/4.0.png";
 import star4_5 from "../../assets/star-ratings/4.5.png";
 import star5 from "../../assets/star-ratings/5.0.png";
 
-export default function StarRating({ RawRating }) {
-  const rating = Math.round(RawRating * 2) / 2;
+export default function StarRating({ DecRating }) {
+  const rating = Math.round(DecRating * 2) / 2;
   console.log(rating);
 
   const starImages = {

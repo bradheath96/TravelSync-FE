@@ -19,6 +19,7 @@
   --mainpin-color: #c5ebc3;
   --quad-color: #e4f6e3;
   --background-color: #f0faef;
+  --nav-color: rgba(116, 190, 202, 0.452);
 }
 
 * {
@@ -65,16 +66,17 @@ body {
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  width: 90%;
+  color: black;
+  width: 80%;
   padding: 3% 5%;
   position: fixed;
   bottom: 0;
-  left: 0;
+  left: auto;
+  right: auto;
   border-top-left-radius: 30px;
   border-top-right-radius: 30px;
-  box-shadow: 0 0 0 4px rgba(0, 0, 0, 0);
-
-  background-color: var(--secondary-color);
+  box-shadow: 4px 8px 12px rgba(0.2, 0.2, 0.2, 0.277);
+  background-color: var(--nav-color);
 }
 
 .bottomNavButton {
@@ -90,7 +92,7 @@ body {
 }
 
 .bottomNavButton img {
-  width: 50%;
+  width: 40%;
 }
 
 .topNav {

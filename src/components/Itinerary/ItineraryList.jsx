@@ -2,6 +2,7 @@ import React, { useState, useEffect, useContext } from "react";
 import { ItineraryContext } from "../Context/ItineraryContextProvider";
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import {
   getItineraryByItineraryID,
   getItineraryEvents,
@@ -142,7 +143,12 @@ const ItineraryList = () => {
                             alt="delete button"
                           />
                         </button>
-                        {event.name}
+                        <Link
+                          to={`/location/${event.place_id}`}
+                          className="itineraryDetail"
+                        >
+                          {event.name}
+                        </Link>
                         <img src={reshuffle} className="reshuffleImg" />
                       </div>
                     </div>

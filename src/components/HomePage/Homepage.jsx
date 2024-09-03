@@ -1,6 +1,5 @@
 import { useState, useContext, useEffect } from "react";
-import CreateItinerary from "./CreateItinerary";
-import JoinItinerary from "./JoinItinerary";
+
 import UserItinerariesList from "./UserItinerariesList";
 import logo from "../../assets/TravelSync.png";
 import { useNavigate } from "react-router-dom";
@@ -9,12 +8,15 @@ import { useAuth } from "../Context/AuthContext/index";
 import { doSignOut } from "../../firebase/auth";
 import { getUser } from "../../axios";
 import CreateAndJoin from "./CreateAndJoin";
+import { LocationContext } from "../Context/LocationsContextProvider";
 
 export default function Homepage() {
-  const { userLoggedIn, currentUser } = useAuth();
+  const { currentUser } = useAuth();
   const { setCurrentItinerary } = useContext(ItineraryContext);
   console.log(currentUser);
   const [name, setName] = useState("");
+
+  const { setLocationsList } = useContext(LocationContext);
 
   const [itineraryUpdates, setItineraryUpdates] = useState(false);
 
@@ -29,6 +31,7 @@ export default function Homepage() {
   }, []);
 
   const handleOnClick = () => {
+    setLocationsList([]);
     doSignOut().then(() => {
       navigate("/login");
     });

@@ -99,8 +99,7 @@
   padding: 5px;
   background-color: #ffffffcd;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
-
-  transition: 300ms ease-in-out;
+  transition: 200ms ease-in-out;
   margin-top: 5px;
   max-width: 300px;
   width: 100%;
@@ -108,6 +107,6 @@
 }
 
 .form-input:focus {
-  transform: scale(1.05);
-  box-shadow: 13px 13px 100px #969696, -13px -13px 100px #ffffff;
+  transform: scale(1.02);
+  box-shadow: 13px 13px 50px #969696, -13px -13px 50px #ffffff;
 }
